@@ -44,7 +44,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // We need to account for # of times an elt appears
         if (elt.compareTo(this.root) == 0) {
             return true;
-        } else if (elt.compareTo(this.root) == -1) {
+        } else if (elt.compareTo(this.root) < 0) {
             return left.member(elt);
         } else {
             return right.member(elt);

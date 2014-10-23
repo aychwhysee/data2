@@ -13,13 +13,13 @@ public class Testers {
         // MT set
         FiniteBag mT = new MT_FiniteBag();
         // Left branches
-        FiniteBag b1 = new NonMT_FiniteBag(mT, 6, mT);
-        FiniteBag b2 = new NonMT_FiniteBag(mT, 5, b1);
+        FiniteBag<Integer> b1 = new NonMT_FiniteBag(mT, 6, mT);
+        FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, b1);
         // Right branches
-        FiniteBag b3 = new NonMT_FiniteBag(mT, 8, mT);
-        FiniteBag b4 = new NonMT_FiniteBag(b3, 9, mT);
+        FiniteBag<Integer> b3 = new NonMT_FiniteBag(mT, 8, mT);
+        FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, mT);
         // Combined with root = 7
-        FiniteBag b5 = new NonMT_FiniteBag(b2, 7, b4);
+        FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, b4);
         
         FiniteBag<String> s1 = new NonMT_FiniteBag(mT, "aa", mT);
         FiniteBag<String> s2 = new NonMT_FiniteBag(mT, "a", s1);
@@ -55,7 +55,10 @@ public class Testers {
         System.out.println(s5.member("aa") + " should be " + true);
         System.out.println(s5.member("a") + " should be " + true);
         
+        System.out.println("a".compareTo("aaa"));
         System.out.println("a".compareTo("aa"));
+        System.out.println("aaaa".compareTo("a"));
+        
         
     }
     
