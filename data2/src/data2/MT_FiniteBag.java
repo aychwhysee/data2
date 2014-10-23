@@ -14,7 +14,9 @@ public class MT_FiniteBag<D> implements FiniteBag {
         return true;
     }
     
-    @Override
+    @Override //Because NetBeans? idk yet
+    // Wants "Object" instead of "D". Why? Also for the other ones that
+    // take in data type <D>.
     public boolean member(D elt) {
         // MT_FiniteBag is always MT, no members, return false
         return false;
