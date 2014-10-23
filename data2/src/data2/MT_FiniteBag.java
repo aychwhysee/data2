@@ -32,18 +32,16 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     
     public FiniteBag remove(D elt) {
         // Removing from an empty bag should just return the original empty bag
-        // But since we're going for a _pure_ implementation, return a fresh
-        // empty right?
-        return new MT_FiniteBag();
+        return this;
     }
     
     public FiniteBag removeAll(D elt) {
         // Same reasoning as above
-        return new MT_FiniteBag();
+        return this;
     }
     
     public FiniteBag remove(D elt, int nCopies) {
-        return new MT_FiniteBag();
+        return this;
     }
     
     public FiniteBag union(FiniteBag u) {
@@ -53,7 +51,7 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     
     public FiniteBag inter(FiniteBag u) {
         // Intersection of MT and anything is just MT
-        return new MT_FiniteBag();
+        return this;
     }
     
     public FiniteBag diff(FiniteBag u) {

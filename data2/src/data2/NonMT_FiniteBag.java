@@ -24,11 +24,6 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // Can't just do left + right + 1 now, since an elt could be repeated
         // and can have a count of more than just 1.
         // So we need a "count" variable
-        // Does this also mean we need a method to return how many times
-        // an elt of type D is in the FiniteBag?
-        // This could be all where we start thinking about makin' that API
-        // and iterating and all that jazz.
-        
     }
     
     public int getCount(D elt) {
@@ -47,7 +42,13 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // multisets in the first place? With FiniteSets, we used
         // member as a big player in getting those, but here...
         // We need to account for # of times an elt appears
-        
+        if (elt.compareTo(this.root) == 0) {
+            return true;
+        } else if (elt.compareTo(this.root) == -1) {
+            return left.member(elt);
+        } else {
+            return right.member(elt);
+        }
     }
     
     public FiniteBag add(D elt) {
@@ -70,7 +71,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
     
     public FiniteBag union(FiniteBag u) {
-        
+        return left.union(right.union(u)).add(root);
     }
     
     public FiniteBag inter(FiniteBag u){
