@@ -22,13 +22,11 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
     
     public int cardinality() {
-        // Can't just do left + right + 1 now, since an elt could be repeated
-        // and can have a count of more than just 1.
-        // So we need a "count" variable
+        return left.cardinality() + right.cardinality() + count;
     }
     
     public int getCount(D elt) {
-        
+        return this.count; //????????
     }
     
     public boolean isEmptyHuh() {

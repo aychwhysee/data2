@@ -14,7 +14,7 @@ public class Testers {
         FiniteBag mT = new MT_FiniteBag();
         // Left branches
         FiniteBag<Integer> b1 = new NonMT_FiniteBag(mT, 6, 1, mT);
-        FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, 1, b1);
+        FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, 2, b1);
         // Right branches
         FiniteBag<Integer> b3 = new NonMT_FiniteBag(mT, 8, 1, mT);
         FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, 1, mT);
@@ -26,6 +26,16 @@ public class Testers {
         FiniteBag<String> s3 = new NonMT_FiniteBag(mT, "aaaa", 1, mT);
         FiniteBag<String> s4 = new NonMT_FiniteBag(s3, "aaaaa", 1, mT);
         FiniteBag<String> s5 = new NonMT_FiniteBag(s2, "aaa", 1, s4);
+        
+        // Cardinality tests
+        System.out.println("=== Cardinality tests ===");
+        System.out.println(mT.cardinality() + " should be " + 0);
+        System.out.println(b1.cardinality() + " should be " + 1);
+        System.out.println(b2.cardinality() + " should be " + 3);
+        System.out.println(b3.cardinality() + " should be " + 1);
+        System.out.println(b4.cardinality() + " should be " + 2);
+        System.out.println(b5.cardinality() + " should be " + 6);
+        
         
         //Member tests
         System.out.println("=== Member tests ===");
