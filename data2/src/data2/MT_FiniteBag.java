@@ -40,6 +40,10 @@ public class MT_FiniteBag<D> implements FiniteBag {
         return new MT_FiniteBag();
     }
     
+    public FiniteBag remove(D elt, int nCopies) {
+        return new MT_FiniteBag();
+    }
+    
     public FiniteBag union(FiniteBag u) {
         // Since this is MT, just return u
         return u;

@@ -61,6 +61,10 @@ public class NonMT_FiniteBag<D> implements FiniteBag {
         
     }
     
+    public FiniteBag remove(D elt, int nCopies) {
+        
+    }
+    
     public FiniteBag union(FiniteBag u) {
         
     }
