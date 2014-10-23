@@ -6,12 +6,26 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     FiniteBag left;
     FiniteBag right;
     int count;
+    
+    NonMT_FiniteBag(D root) {
+        this.root = root;
+        this.count = 1;
+        this.left = new MT_FiniteBag();
+        this.right = new MT_FiniteBag();
+    }
 
     NonMT_FiniteBag(D root, int count) {
         this.root = root;
         this.count = count;
         this.left = new MT_FiniteBag();
         this.right = new MT_FiniteBag();
+    }
+
+    NonMT_FiniteBag(FiniteBag left, D root, FiniteBag right) {
+        this.left = left;
+        this.root = root;
+        this.right = right;
+        this.count = 1;
     }
 
     NonMT_FiniteBag(FiniteBag left, D root, int count, FiniteBag right) {
@@ -57,10 +71,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag add(D elt) {
-        // find a place to add elt into. If elt is = a root, just
-        // add 1 to the count of the elt and return the tree with the new count
-        // else keep checking left and right...uh...and balance yourself, tree!
-
+        if (elt.compareTo(this.root) == 0) {
+            return new NonMT_FiniteBag(this.left, this.root, this.count + 1, this.right);
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.right);
+        } else {
+            return new NonMT_FiniteBag(this.left, this.root, this.right.add(elt));
+        }
+        // Need to make it self-balancing now...?
     }
 
     public FiniteBag add(D elt, int nCopies) {
@@ -71,11 +89,11 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 
     }
 
-    public FiniteBag removeAll(D elt) {
+    public FiniteBag remove(D elt, int nCopies) {
 
     }
 
-    public FiniteBag remove(D elt, int nCopies) {
+    public FiniteBag removeAll(D elt) {
 
     }
 

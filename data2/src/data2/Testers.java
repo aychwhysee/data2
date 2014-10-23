@@ -72,6 +72,21 @@ public class Testers {
         System.out.println("a".compareTo("aaa"));
         System.out.println("a".compareTo("aa"));
         System.out.println("aaaa".compareTo("a"));
+        
+        // add tests
+        System.out.println("=== add tests ===");
+        System.out.println(mT.add(9).cardinality() + " should be " + 1);
+        System.out.println(mT.add(9).member(9) + " should be " + true);
+        System.out.println(b5.add(2).cardinality() + " should be " + 7); // FAILS
+        System.out.println(b5.add(5).cardinality() + " should be " + 7);
+        System.out.println(b5.add(5).getCount(5) + " should be " + 3);
+        System.out.println(b5.add(22).cardinality() + " should be " + 7);
+        System.out.println(b5.add(22).member(22) + " should be " + true);
+        System.out.println(b5.add(22).getCount(22) + " should be " + 1);
+        
+        Integer testElt1 = 4;
+        System.out.println(testElt1.compareTo(7));
+        
 
     }
 

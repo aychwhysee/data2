@@ -41,12 +41,12 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         return this;
     }
 
-    public FiniteBag removeAll(D elt) {
-        // Same reasoning as above
+    public FiniteBag remove(D elt, int nCopies) {
         return this;
     }
 
-    public FiniteBag remove(D elt, int nCopies) {
+    public FiniteBag removeAll(D elt) {
+        // Same reasoning as above
         return this;
     }
 
