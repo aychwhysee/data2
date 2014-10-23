@@ -25,17 +25,19 @@ public class MT_FiniteBag<D> implements FiniteBag {
     public FiniteBag add(D elt) {
         // Since this is always empty, we just need to make a new NonMT bag
         // with elt as the only element in the bag
-        return new NonMT_FiniteBag(this, elt, this, 1);
+        return new NonMT_FiniteBag(elt);
     }
     
     public FiniteBag remove(D elt) {
         // Removing from an empty bag should just return the original empty bag
-        return this;
+        // But since we're going for a _pure_ implementation, return a fresh
+        // empty right?
+        return new MT_FiniteBag();
     }
     
     public FiniteBag removeAll(D elt) {
         // Same reasoning as above
-        return this;
+        return new MT_FiniteBag();
     }
     
     public FiniteBag union(FiniteBag u) {
@@ -45,7 +47,7 @@ public class MT_FiniteBag<D> implements FiniteBag {
     
     public FiniteBag inter(FiniteBag u) {
         // Intersection of MT and anything is just MT
-        return this;
+        return new MT_FiniteBag();
     }
     
     public FiniteBag diff(FiniteBag u) {
