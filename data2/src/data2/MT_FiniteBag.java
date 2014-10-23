@@ -1,6 +1,6 @@
 package data2;
 
-public class MT_FiniteBag<D> implements FiniteBag {
+public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     
     MT_FiniteBag() {}
     
@@ -9,12 +9,14 @@ public class MT_FiniteBag<D> implements FiniteBag {
         return 0;
     }
     
+    public int getCount(D elt) {
+        return 0;
+    }
+    
     public boolean isEmptyHuh() {
         // MT_FiniteBag is always MT, return true
         return true;
     }
-    
-    @Override //Because NetBeans? idk yet
     // Wants "Object" instead of "D". Why? Also for the other ones that
     // take in data type <D>.
     public boolean member(D elt) {

@@ -1,6 +1,6 @@
 package data2;
 
-public class NonMT_FiniteBag<D> implements FiniteBag {
+public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     
     D root;
     FiniteBag left;
@@ -28,6 +28,10 @@ public class NonMT_FiniteBag<D> implements FiniteBag {
         // an elt of type D is in the FiniteBag?
         // This could be all where we start thinking about makin' that API
         // and iterating and all that jazz.
+        
+    }
+    
+    public int getCount(D elt) {
         
     }
     

@@ -1,8 +1,9 @@
 package data2;
 
-public interface FiniteBag<D> {
+public interface FiniteBag<D extends Comparable> {
     
     public int cardinality();
+    public int getCount(D elt);
     public boolean isEmptyHuh();
     public boolean member(D elt);
     public FiniteBag add(D elt);
