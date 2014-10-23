@@ -26,6 +26,8 @@ public class NonMT_FiniteBag<D> implements FiniteBag {
         // So we need a "count" variable
         // Does this also mean we need a method to return how many times
         // an elt of type D is in the FiniteBag?
+        // This could be all where we start thinking about makin' that API
+        // and iterating and all that jazz.
         
     }
     
