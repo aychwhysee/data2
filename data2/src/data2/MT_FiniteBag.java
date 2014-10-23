@@ -27,7 +27,11 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     public FiniteBag add(D elt) {
         // Since this is always empty, we just need to make a new NonMT bag
         // with elt as the only element in the bag
-        return new NonMT_FiniteBag(elt);
+        return new NonMT_FiniteBag(elt, 1);
+    }
+    
+    public FiniteBag add(D elt, int nCopies) {
+        return new NonMT_FiniteBag(elt, nCopies);
     }
     
     public FiniteBag remove(D elt) {

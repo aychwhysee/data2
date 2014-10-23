@@ -7,16 +7,17 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     FiniteBag right;
     int count;
     
-    NonMT_FiniteBag(D root) {
+    NonMT_FiniteBag(D root, int count) {
         this.root = root;
-//        this.count = 1;
+        this.count = count;
         this.left = new MT_FiniteBag();
         this.right = new MT_FiniteBag();
     }
     
-    NonMT_FiniteBag(FiniteBag left, D root, FiniteBag right) {
+    NonMT_FiniteBag(FiniteBag left, D root, int count, FiniteBag right) {
         this.left = left;
         this.root = root;
+        this.count = count;
         this.right = right;
     }
     
@@ -55,6 +56,10 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // find a place to add elt into. If elt is = a root, just
         // add 1 to the count of the elt and return the tree with the new count
         // else keep checking left and right...uh...and balance yourself, tree!
+        
+    }
+    
+    public FiniteBag add(D elt, int nCopies) {
         
     }
     

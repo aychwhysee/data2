@@ -13,19 +13,19 @@ public class Testers {
         // MT set
         FiniteBag mT = new MT_FiniteBag();
         // Left branches
-        FiniteBag<Integer> b1 = new NonMT_FiniteBag(mT, 6, mT);
-        FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, b1);
+        FiniteBag<Integer> b1 = new NonMT_FiniteBag(mT, 6, 1, mT);
+        FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, 1, b1);
         // Right branches
-        FiniteBag<Integer> b3 = new NonMT_FiniteBag(mT, 8, mT);
-        FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, mT);
+        FiniteBag<Integer> b3 = new NonMT_FiniteBag(mT, 8, 1, mT);
+        FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, 1, mT);
         // Combined with root = 7
-        FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, b4);
+        FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, 1, b4);
         
-        FiniteBag<String> s1 = new NonMT_FiniteBag(mT, "aa", mT);
-        FiniteBag<String> s2 = new NonMT_FiniteBag(mT, "a", s1);
-        FiniteBag<String> s3 = new NonMT_FiniteBag(mT, "aaaa", mT);
-        FiniteBag<String> s4 = new NonMT_FiniteBag(s3, "aaaaa", mT);
-        FiniteBag<String> s5 = new NonMT_FiniteBag(s2, "aaa", s4);
+        FiniteBag<String> s1 = new NonMT_FiniteBag(mT, "aa", 1, mT);
+        FiniteBag<String> s2 = new NonMT_FiniteBag(mT, "a", 1, s1);
+        FiniteBag<String> s3 = new NonMT_FiniteBag(mT, "aaaa", 1, mT);
+        FiniteBag<String> s4 = new NonMT_FiniteBag(s3, "aaaaa", 1, mT);
+        FiniteBag<String> s5 = new NonMT_FiniteBag(s2, "aaa", 1, s4);
         
         //Member tests
         System.out.println("=== Member tests ===");
