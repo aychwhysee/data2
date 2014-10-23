@@ -55,12 +55,6 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public boolean member(D elt) {
-        // Can work similarly to FiniteSets right? Since it's only checking
-        // if an elt of type D is in the bag, and not how many of it. 
-        // Also, why/how would we get the intersection, subset etc. of
-        // multisets in the first place? With FiniteSets, we used
-        // member as a big player in getting those, but here...
-        // We need to account for # of times an elt appears
         if (elt.compareTo(this.root) == 0) {
             return true;
         } else if (elt.compareTo(this.root) < 0) {
@@ -74,9 +68,9 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         if (elt.compareTo(this.root) == 0) {
             return new NonMT_FiniteBag(this.left, this.root, this.count + 1, this.right);
         } else if (elt.compareTo(this.root) < 0) {
-            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.right);
+            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.count, this.right);
         } else {
-            return new NonMT_FiniteBag(this.left, this.root, this.right.add(elt));
+            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt));
         }
         // Need to make it self-balancing now...?
     }
