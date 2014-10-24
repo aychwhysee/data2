@@ -10,7 +10,7 @@ public class Testers {
         //Hard-coded tests for now:
 
         // MT set
-        FiniteBag mT = new MT_FiniteBag();
+        FiniteBag mT = empty();
         // Left branches
         FiniteBag<Integer> b1 = new NonMT_FiniteBag(mT, 6, 1, mT);
         FiniteBag<Integer> b2 = new NonMT_FiniteBag(mT, 5, 2, b1);
@@ -19,7 +19,10 @@ public class Testers {
         FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, 1, mT);
         // Combined with root = 7
         FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, 1, b4);
-
+        
+        
+        // Same as above except using add and union to build these, for extra
+        // testing
         FiniteBag<Integer> t1 = mT.add(6);
         FiniteBag<Integer> t2 = t1.add(5, 2);
         FiniteBag<Integer> t3 = mT.add(8);
