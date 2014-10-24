@@ -23,24 +23,43 @@ public class Testers {
     }
 
     static int empty_isEmptyHuh = 0;
+    static int isEmptyHuh_cardinality = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
     public static void empty_isEmptyHuh(int count) throws Exception {
-        if (count == 0) {
-            FiniteBag e = empty();
-            if (!e.isEmptyHuh()) {
-                throw new Exception("Test failed. MT bag is not MT");
+        for (int i = 0; i < 50; i++) {
+            if (count == 0) {
+                FiniteBag e = empty();
+                if (!e.isEmptyHuh()) {
+                    throw new Exception("Test failed. MT bag is not MT");
+                }
+            } else {
+                int length = randomInt(1, 10);
+                FiniteBag n = randomBag(length);
+                if (n.isEmptyHuh()) {
+                    throw new Exception("Test failed. NonMT bag is MT");
+                }
             }
-        } else {
-            int length = randomInt(1, 10);
-            FiniteBag n = randomBag(length);
-            if (n.isEmptyHuh()) {
-                throw new Exception("Test failed. NonMT bag is MT");
-            }
+            empty_isEmptyHuh++;
         }
-        empty_isEmptyHuh++;
     }
+
+    // isEmptyHuh and cardinality
+    public static void isEmptyHuh_cardinality() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            FiniteBag b = randomBag(length);
+            if (!b.isEmptyHuh() && (b.cardinality() == 0)) {
+                throw new Exception("Test failed. NonMT bag had card. = 0");
+            }
+            if (b.isEmptyHuh() && (b.cardinality() != 0)) {
+                throw new Exception("Test failed. MT ");
+            }
+            isEmptyHuh_cardinality++;
+        }
+    }
+    
 
     public static void main(String[] args) throws Exception {
         //Hard-coded tests for now:
@@ -241,11 +260,13 @@ public class Testers {
         System.out.println("=====================================");
         System.out.println();
 
-        for (int i = 0; i < 50; i++) {
-            int checkInt = randomInt(0, 1);
-            empty_isEmptyHuh(checkInt);
-        }
+        int checkInt = randomInt(0, 1);
+        empty_isEmptyHuh(checkInt);
         System.out.println("Tested empty_isEmptyHuh " + empty_isEmptyHuh + " times");
+
+        isEmptyHuh_cardinality();
+        System.out.println("Tested isEmptyHuh_cardinality " + isEmptyHuh_cardinality + " times");
+
     }
 
 }
