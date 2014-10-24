@@ -51,12 +51,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 
     public boolean isEmptyHuh() {
         // NonMT bag is NonMT. Return false.
-        return false;
+        //return false;
+        // ^ the above is no longer valid
+        return this.count < 1;
     }
 
     public boolean member(D elt) {
         if (elt.compareTo(this.root) == 0) {
-            return this.count != 0;
+            return this.count > 0;
         } else if (elt.compareTo(this.root) < 0) {
             return left.member(elt);
         } else {
