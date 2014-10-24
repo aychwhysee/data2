@@ -53,7 +53,15 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // NonMT bag is NonMT. Return false.
         //return false;
         // ^ the above is no longer valid
-        return this.count < 1;
+        if (this.getCount(root) == 0) {
+            if (!left.isEmptyHuh()) {
+                return right.isEmptyHuh();
+            } else {
+                return left.isEmptyHuh();
+            }
+        } else {
+            return false;
+        }
     }
 
     public boolean member(D elt) {
@@ -94,7 +102,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 //                return left.union(right);
 //                // If more than one of the elt exists, drop count by 1
 //            } else {
-                return new NonMT_FiniteBag(this.left, this.root, this.count - 1, this.right);
+            return new NonMT_FiniteBag(this.left, this.root, this.count - 1, this.right);
 //          }
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.left.remove(elt), this.root, this.count, this.right);

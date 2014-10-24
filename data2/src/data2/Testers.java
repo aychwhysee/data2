@@ -182,7 +182,21 @@ public class Testers {
         System.out.println(mT.subset(mT) + " should be " + true);
         System.out.println(mT.subset(t5) + " should be " + true);
         System.out.println(t5.subset(t7) + " should be " + false);
-
+        
+        // isEmptyHuh tests
+        System.out.println(mT.isEmptyHuh() + " should be " + true);
+        System.out.println(t1.isEmptyHuh() + " should be " + false);
+        System.out.println(t2.isEmptyHuh() + " should be " + false);
+        System.out.println(t3.isEmptyHuh() + " should be " + false);
+        System.out.println(t4.isEmptyHuh() + " should be " + false);
+        System.out.println(t5.isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(5).isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(6).isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(7).isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(8).isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(9).isEmptyHuh() + " should be " + false);
+        System.out.println(t5.remove(5, 2).remove(6).remove(7).remove(8).remove(9).isEmptyHuh()
+        + " should be " + true);
     }
 
 }
