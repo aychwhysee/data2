@@ -40,6 +40,7 @@ public class Testers {
         System.out.println(b1.getCount(6) + " should be " + 1);
         System.out.println(b2.getCount(5) + " should be " + 2);
         System.out.println(b5.getCount(5) + " should be " + 2); // FIXED
+        System.out.println(b5.getCount(1) + " should be " + 0);
 
         //Member tests
         System.out.println("=== Member tests ===");
@@ -100,6 +101,7 @@ public class Testers {
         System.out.println(b5.remove(6).member(6) + " should be " + false);
         System.out.println(b1.remove(6).cardinality() + " should be " + 0);
         System.out.println(b1.remove(6).isEmptyHuh() + " should be " + true);
+        System.out.println(b5.remove(22).cardinality() + " should be " + 6);
         // remove (with nCopies) tests
         System.out.println("=== removing nCopies ===");
         System.out.println(b5.remove(5, 2).cardinality() + " should be " + 4);
@@ -108,6 +110,14 @@ public class Testers {
         System.out.println(b5.remove(6, 2).member(6) + " should be " + false);
         System.out.println(b5.remove(6, 1).member(6) + " should be " + false);
         System.out.println(b5.remove(5, 3).member(5) + " should be " + false);
+        // removeAll tests
+        System.out.println("=== removeAll tests ===");
+        System.out.println(b5.removeAll(5).cardinality() + " should be " + 4);
+        System.out.println(b5.removeAll(5).member(5) + " should be " + false);
+        System.out.println(b5.removeAll(6).cardinality() + " should be " + 5);
+        System.out.println(b5.removeAll(6).member(6) + " should be " + false);
+        System.out.println(b5.removeAll(5).member(6) + " should be " + true);
+        
         
         
 

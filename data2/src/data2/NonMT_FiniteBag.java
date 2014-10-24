@@ -118,7 +118,13 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag removeAll(D elt) {
-
+        if (elt.compareTo(this.root) == 0) {
+            return left.union(right);
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.left.removeAll(elt), this.root, this.count, this.right);
+        } else {
+            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.removeAll(elt));
+        }
     }
 
     public FiniteBag union(FiniteBag u) {
