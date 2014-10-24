@@ -92,6 +92,24 @@ public class Testers {
         System.out.println(b5.add(4, 3).cardinality() + " should be " + 9);
         System.out.println(b5.add(4, 3).getCount(4) + " should be " + 3);
         
+        // remove tests
+        System.out.println("=== remove tests ===");
+        System.out.println(b5.remove(5).cardinality() + " should be " + 5);
+        System.out.println(b5.remove(5).member(5) + " should be " + true);
+        System.out.println(b5.remove(5).member(6) + " should be " + true);
+        System.out.println(b5.remove(6).member(6) + " should be " + false);
+        System.out.println(b1.remove(6).cardinality() + " should be " + 0);
+        System.out.println(b1.remove(6).isEmptyHuh() + " should be " + true);
+        // remove (with nCopies) tests
+        System.out.println("=== removing nCopies ===");
+        System.out.println(b5.remove(5, 2).cardinality() + " should be " + 4);
+        System.out.println(b5.remove(5, 2).member(5) + " should be " + false);
+        System.out.println(b5.remove(5, 2).member(6) + " should be " + true);
+        System.out.println(b5.remove(6, 2).member(6) + " should be " + false);
+        System.out.println(b5.remove(6, 1).member(6) + " should be " + false);
+        System.out.println(b5.remove(5, 3).member(5) + " should be " + false);
+        
+        
 
     }
 

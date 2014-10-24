@@ -86,10 +86,34 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag remove(D elt) {
-
+        if (elt.compareTo(this.root) == 0) {
+            if (this.count == 1) {
+                // If completely removing an elt, return union of left and right
+                return left.union(right);
+                // If more than one of the elt exists, drop count by 1
+            } else {
+                return new NonMT_FiniteBag(this.left, this.root, this.count -1, this.right);
+            }
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.left.remove(elt), this.root, this.count, this.right);
+        } else {
+            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.remove(elt));
+        }
     }
 
     public FiniteBag remove(D elt, int nCopies) {
+//        int max = Math.max(0, this.count-nCopies);
+        if (elt.compareTo(this.root) == 0) {
+            if (this.count <= nCopies) {
+                return left.union(right);
+            } else {
+                return new NonMT_FiniteBag(this.left, this.root, this.count -nCopies, this.right);
+            }
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.left.remove(elt, nCopies), this.root, this.count, this.right);
+        } else {
+            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.remove(elt, nCopies));
+        }
 
     }
 
