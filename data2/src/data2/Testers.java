@@ -19,7 +19,7 @@ public class Testers {
         FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, 1, mT);
         // Combined with root = 7
         FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, 1, b4);
-        
+
         FiniteBag<Integer> t1 = mT.add(6);
         FiniteBag<Integer> t2 = t1.add(5, 2);
         FiniteBag<Integer> t3 = mT.add(8);
@@ -27,7 +27,8 @@ public class Testers {
         FiniteBag<Integer> t5 = t2.union(t4).add(7);
         FiniteBag<Integer> t6 = mT.add(13).add(18).add(15).add(21);
         FiniteBag<Integer> t7 = mT.add(6).add(8).add(9);
-        
+        FiniteBag<Integer> t8 = mT.add(5);
+
         FiniteBag<String> s1 = new NonMT_FiniteBag(mT, "aa", 1, mT);
         FiniteBag<String> s2 = new NonMT_FiniteBag(mT, "a", 1, s1);
         FiniteBag<String> s3 = new NonMT_FiniteBag(mT, "aaaa", 1, mT);
@@ -81,7 +82,7 @@ public class Testers {
         System.out.println("a".compareTo("aaa"));
         System.out.println("a".compareTo("aa"));
         System.out.println("aaaa".compareTo("a"));
-        
+
         // add tests
         System.out.println("=== add tests ===");
         System.out.println(mT.add(9).cardinality() + " should be " + 1);
@@ -100,7 +101,7 @@ public class Testers {
         System.out.println(b5.add(5, 3).getCount(5) + " should be " + 5);
         System.out.println(b5.add(4, 3).cardinality() + " should be " + 9);
         System.out.println(b5.add(4, 3).getCount(4) + " should be " + 3);
-        
+
         // remove tests
         System.out.println("=== remove tests ===");
         System.out.println(b5.remove(5).cardinality() + " should be " + 5);
@@ -125,7 +126,7 @@ public class Testers {
         System.out.println(b5.removeAll(6).cardinality() + " should be " + 5);
         System.out.println(b5.removeAll(6).member(6) + " should be " + false);
         System.out.println(b5.removeAll(5).member(6) + " should be " + true);
-        
+
         // Union tests
         System.out.println("=== union tests ===");
         System.out.println(mT.union(t2).cardinality() + " should be " + 3);
@@ -140,9 +141,18 @@ public class Testers {
         System.out.println(t5.union(t6).cardinality() + " should be " + 10);
         System.out.println(t5.union(t6).member(15) + " should be " + true);
         System.out.println(t5.union(t6).member(77) + " should be " + false);
-        
-        
-        
+
+        // inter tests
+        System.out.println("=== Intersection tests ===");
+        System.out.println(mT.inter(mT).cardinality() + " should be " + 0);
+        System.out.println(t5.inter(mT).cardinality() + " should be " + 0);
+        System.out.println(mT.inter(t5).cardinality() + " should be " + 0);
+        System.out.println(t5.inter(t7).cardinality() + " should be " + 3);
+        System.out.println(t5.inter(t8).cardinality() + " should be " + 1);
+        System.out.println(t5.inter(t7).member(6) + " should be " + true);
+        System.out.println(t5.inter(t7).member(8) + " should be " + true);
+        System.out.println(t5.inter(t7).member(9) + " should be " + true);
+        System.out.println(t5.inter(t7).member(5) + " should be " + false);
 
     }
 
