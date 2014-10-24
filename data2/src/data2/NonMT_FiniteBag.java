@@ -133,13 +133,15 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 
     public FiniteBag inter(FiniteBag u) {
         if (u.member(this.root)) {
-            if (u.getCount(root) > this.getCount(root)) {
-                return new NonMT_FiniteBag(this.left.inter(u), this.root, this.getCount(root),
-                        this.right.inter(u));
-            } else {
-                return new NonMT_FiniteBag(this.left.inter(u), this.root, u.getCount(root),
-                        this.right.inter(u));
-            }
+            int min = Math.min(u.getCount(root), this.getCount(root));
+            return new NonMT_FiniteBag(this.left.inter(u), this.root, min, this.right.inter(u));
+//            if (u.getCount(root) > this.getCount(root)) {
+//                return new NonMT_FiniteBag(this.left.inter(u), this.root, this.getCount(root),
+//                        this.right.inter(u));
+//            } else {
+//                return new NonMT_FiniteBag(this.left.inter(u), this.root, u.getCount(root),
+//                        this.right.inter(u));
+//            }
         } else {
             return this.left.inter(u).union(this.right.inter(u));
         }
