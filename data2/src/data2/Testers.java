@@ -162,6 +162,23 @@ public class Testers {
         System.out.println(t5.diff(t6).member(8) + " should be " + false);
         System.out.println(t8.diff(t5).cardinality() + " should be " + 5);
         System.out.println(t7.diff(t5).cardinality() + " should be " + 3);
+        
+         // equal tests
+        System.out.println("=== Equal tests ===");
+        System.out.println(mT.equal(mT) + " should be " + true);
+        System.out.println(mT.equal(t1) + " should be " + false);
+        System.out.println(t1.equal(t2) + " should be " + false);
+        System.out.println(t1.equal(t1) + " should be " + true);
+        System.out.println(t5.equal(t6) + " should be " + false);
+        System.out.println(t5.union(t6).equal(t7) + " should be " + false);
+        System.out.println(t5.equal(t7.add(5, 2).add(7)) + " should be " + true);
+
+        // subset tests
+        System.out.println("=== Subset tests ===");
+        System.out.println(t7.subset(t5) + " should be " + true);
+        System.out.println(mT.subset(mT) + " should be " + true);
+        System.out.println(mT.subset(t5) + " should be " + true);
+        System.out.println(t5.subset(t7) + " should be " + false);
 
     }
 

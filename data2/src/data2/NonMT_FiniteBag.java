@@ -6,7 +6,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     FiniteBag left;
     FiniteBag right;
     int count;
-    
+
     NonMT_FiniteBag(D root) {
         this.root = root;
         this.count = 1;
@@ -92,7 +92,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
                 return left.union(right);
                 // If more than one of the elt exists, drop count by 1
             } else {
-                return new NonMT_FiniteBag(this.left, this.root, this.count -1, this.right);
+                return new NonMT_FiniteBag(this.left, this.root, this.count - 1, this.right);
             }
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.left.remove(elt), this.root, this.count, this.right);
@@ -107,7 +107,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
             if (this.count <= nCopies) {
                 return left.union(right);
             } else {
-                return new NonMT_FiniteBag(this.left, this.root, this.count -nCopies, this.right);
+                return new NonMT_FiniteBag(this.left, this.root, this.count - nCopies, this.right);
             }
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.left.remove(elt, nCopies), this.root, this.count, this.right);
@@ -132,13 +132,13 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag inter(FiniteBag u) {
-        if(u.member(this.root)) {
+        if (u.member(this.root)) {
             if (u.getCount(root) > this.getCount(root)) {
                 return new NonMT_FiniteBag(this.left.inter(u), this.root, this.getCount(root),
-                this.right.inter(u));
+                        this.right.inter(u));
             } else {
                 return new NonMT_FiniteBag(this.left.inter(u), this.root, u.getCount(root),
-                this.right.inter(u));
+                        this.right.inter(u));
             }
         } else {
             return this.left.inter(u).union(this.right.inter(u));
@@ -155,7 +155,8 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public boolean subset(FiniteBag u) {
-
+        return (u.getCount(root) >= this.getCount(root))
+                && this.left.union(this.right).subset(u);
     }
 
 }
