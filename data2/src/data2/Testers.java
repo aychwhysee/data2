@@ -153,6 +153,15 @@ public class Testers {
         System.out.println(t5.inter(t7).member(8) + " should be " + true);
         System.out.println(t5.inter(t7).member(9) + " should be " + true);
         System.out.println(t5.inter(t7).member(5) + " should be " + false);
+        
+        System.out.println("=== Difference tests ===");
+        System.out.println(t5.diff(mT).cardinality() + " should be " + 0);
+        System.out.println(t5.diff(t6).cardinality() + " should be " + 4);
+        System.out.println(t5.diff(t7).cardinality() + " should be " + 0);
+        System.out.println(t5.diff(t6).member(18) + " should be " + true);
+        System.out.println(t5.diff(t6).member(8) + " should be " + false);
+        System.out.println(t8.diff(t5).cardinality() + " should be " + 5);
+        System.out.println(t7.diff(t5).cardinality() + " should be " + 3);
 
     }
 

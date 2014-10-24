@@ -146,7 +146,8 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag diff(FiniteBag u) {
-
+        FiniteBag removedD = u.remove(root, this.getCount(root));
+        return left.union(right).diff(removedD);
     }
 
     public boolean equal(FiniteBag u) {
