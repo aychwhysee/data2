@@ -128,7 +128,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag union(FiniteBag u) {
-        return left.union(right.union(u)).add(root);
+        return left.union(right.union(u)).add(root, this.getCount(root));
     }
 
     public FiniteBag inter(FiniteBag u) {
