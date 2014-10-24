@@ -102,10 +102,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag remove(D elt, int nCopies) {
-//        int max = Math.max(0, this.count-nCopies);
+//        int max = Math.max(0, this.count-nCopies); <-- only helps if you're
+        // going to set count to 0? But that doesn't fully remove the elt...
         if (elt.compareTo(this.root) == 0) {
+            // If nCopies will make the count go into the negatives or 0,
+            // completely remove the elt from the bag
             if (this.count <= nCopies) {
                 return left.union(right);
+                // else just do the do
             } else {
                 return new NonMT_FiniteBag(this.left, this.root, this.count - nCopies, this.right);
             }
