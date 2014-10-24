@@ -76,7 +76,13 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag add(D elt, int nCopies) {
-
+        if (elt.compareTo(this.root) == 0) {
+            return new NonMT_FiniteBag(this.left, this.root, this.count + nCopies, this.right);
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.left.add(elt, nCopies), this.root, this.count, this.right);
+        } else {
+            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt, nCopies));
+        }
     }
 
     public FiniteBag remove(D elt) {

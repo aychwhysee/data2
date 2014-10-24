@@ -83,9 +83,14 @@ public class Testers {
         System.out.println(b5.add(22).cardinality() + " should be " + 7);
         System.out.println(b5.add(22).member(22) + " should be " + true);
         System.out.println(b5.add(22).getCount(22) + " should be " + 1);
-        
-        Integer testElt1 = 4;
-        System.out.println(testElt1.compareTo(7));
+        // add (with nCopies) tests
+        System.out.println("=== adding nCopies ===");
+        System.out.println(mT.add(9, 4).cardinality() + " should be " + 4);
+        System.out.println(mT.add(9, 4).getCount(9) + " should be " + 4);
+        System.out.println(mT.add(9, 4).member(9) + " should be " + true);
+        System.out.println(b5.add(5, 3).getCount(5) + " should be " + 5);
+        System.out.println(b5.add(4, 3).cardinality() + " should be " + 9);
+        System.out.println(b5.add(4, 3).getCount(4) + " should be " + 3);
         
 
     }
