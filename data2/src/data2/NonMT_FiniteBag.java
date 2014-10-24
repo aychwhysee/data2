@@ -56,7 +56,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 
     public boolean member(D elt) {
         if (elt.compareTo(this.root) == 0) {
-            return true;
+            return this.count != 0;
         } else if (elt.compareTo(this.root) < 0) {
             return left.member(elt);
         } else {
@@ -87,13 +87,13 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
 
     public FiniteBag remove(D elt) {
         if (elt.compareTo(this.root) == 0) {
-            if (this.count == 1) {
-                // If completely removing an elt, return union of left and right
-                return left.union(right);
-                // If more than one of the elt exists, drop count by 1
-            } else {
+//            if (this.count == 1) {
+//                // If completely removing an elt, return union of left and right
+//                return left.union(right);
+//                // If more than one of the elt exists, drop count by 1
+//            } else {
                 return new NonMT_FiniteBag(this.left, this.root, this.count - 1, this.right);
-            }
+//          }
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.left.remove(elt), this.root, this.count, this.right);
         } else {
@@ -107,12 +107,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         if (elt.compareTo(this.root) == 0) {
             // If nCopies will make the count go into the negatives or 0,
             // completely remove the elt from the bag
-            if (this.count <= nCopies) {
-                return left.union(right);
-                // else just do the do
-            } else {
-                return new NonMT_FiniteBag(this.left, this.root, this.count - nCopies, this.right);
-            }
+//            if (this.count <= nCopies) {
+//                return left.union(right);
+//                // else just do the do
+//            } else {
+//                return new NonMT_FiniteBag(this.left, this.root, this.count - nCopies, this.right);
+//            }
+            int max = Math.max(0, this.count - nCopies);
+            return new NonMT_FiniteBag(this.left, this.root, max, this.right);
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.left.remove(elt, nCopies), this.root, this.count, this.right);
         } else {
