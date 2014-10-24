@@ -1,12 +1,48 @@
 package data2;
 
+import java.util.Random;
+
 public class Testers {
 
     public static FiniteBag empty() {
         return new MT_FiniteBag();
     }
 
-    public static void main(String[] args) {
+    static Random rand = new Random();
+
+    public static int randomInt(int min, int max) {
+        return rand.nextInt((max - min) + 1) + min;
+    }
+
+    public static FiniteBag randomBag(int length) {
+        if (length == 0) {
+            return empty();
+        } else {
+            return randomBag(length - 1).add(randomInt(0, 100), randomInt(1, 10));
+        }
+    }
+
+    static int empty_isEmptyHuh = 0;
+
+    // Property testing~
+    // Empty and isEmptyHuh
+    public static void empty_isEmptyHuh(int count) throws Exception {
+        if (count == 0) {
+            FiniteBag e = empty();
+            if (!e.isEmptyHuh()) {
+                throw new Exception("Test failed. MT bag is not MT");
+            }
+        } else {
+            int length = randomInt(1, 10);
+            FiniteBag n = randomBag(length);
+            if (n.isEmptyHuh()) {
+                throw new Exception("Test failed. NonMT bag is MT");
+            }
+        }
+        empty_isEmptyHuh++;
+    }
+
+    public static void main(String[] args) throws Exception {
         //Hard-coded tests for now:
 
         // MT set
@@ -19,8 +55,7 @@ public class Testers {
         FiniteBag<Integer> b4 = new NonMT_FiniteBag(b3, 9, 1, mT);
         // Combined with root = 7
         FiniteBag<Integer> b5 = new NonMT_FiniteBag(b2, 7, 1, b4);
-        
-        
+
         // Same as above except using add and union to build these, for extra
         // testing
         FiniteBag<Integer> t1 = mT.add(6);
@@ -156,7 +191,8 @@ public class Testers {
         System.out.println(t5.inter(t7).member(8) + " should be " + true);
         System.out.println(t5.inter(t7).member(9) + " should be " + true);
         System.out.println(t5.inter(t7).member(5) + " should be " + false);
-        
+
+        // diff tests
         System.out.println("=== Difference tests ===");
         System.out.println(t5.diff(mT).cardinality() + " should be " + 0);
         System.out.println(t5.diff(t6).cardinality() + " should be " + 4);
@@ -165,8 +201,8 @@ public class Testers {
         System.out.println(t5.diff(t6).member(8) + " should be " + false);
         System.out.println(t8.diff(t5).cardinality() + " should be " + 5);
         System.out.println(t7.diff(t5).cardinality() + " should be " + 3);
-        
-         // equal tests
+
+        // equal tests
         System.out.println("=== Equal tests ===");
         System.out.println(mT.equal(mT) + " should be " + true);
         System.out.println(mT.equal(t1) + " should be " + false);
@@ -182,7 +218,7 @@ public class Testers {
         System.out.println(mT.subset(mT) + " should be " + true);
         System.out.println(mT.subset(t5) + " should be " + true);
         System.out.println(t5.subset(t7) + " should be " + false);
-        
+
         // isEmptyHuh tests
         System.out.println(mT.isEmptyHuh() + " should be " + true);
         System.out.println(t1.isEmptyHuh() + " should be " + false);
@@ -196,7 +232,20 @@ public class Testers {
         System.out.println(t5.remove(8).isEmptyHuh() + " should be " + false);
         System.out.println(t5.remove(9).isEmptyHuh() + " should be " + false);
         System.out.println(t5.remove(5, 2).remove(6).remove(7).remove(8).remove(9).isEmptyHuh()
-        + " should be " + true);
+                + " should be " + true);
+
+        // Random tests!!!
+        System.out.println();
+        System.out.println("=====================================");
+        System.out.println("| Property Testing with Random Sets |");
+        System.out.println("=====================================");
+        System.out.println();
+
+        for (int i = 0; i < 50; i++) {
+            int checkInt = randomInt(0, 1);
+            empty_isEmptyHuh(checkInt);
+        }
+        System.out.println("Tested empty_isEmptyHuh " + empty_isEmptyHuh + " times");
     }
 
 }
