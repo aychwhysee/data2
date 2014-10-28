@@ -2,7 +2,12 @@ package data2;
 
 import java.util.Random;
 
-public class Testers {
+// interface randomGenerator
+// - method giveMeThings
+// - Another class implements the above. For each data type (int, string, etc)
+// - Would have method giveMeThings to give random Ints, Strings, etc.
+
+public class Testers<D extends Comparable> {
 
     public static FiniteBag empty() {
         return new MT_FiniteBag();
@@ -259,6 +264,16 @@ public class Testers {
         System.out.println("| Property Testing with Random Sets |");
         System.out.println("=====================================");
         System.out.println();
+        
+        System.out.println("aa".compareTo("aab"));
+        System.out.println("abc".compareTo("def"));
+        System.out.println("def".compareTo("abc"));
+        System.out.println("f".compareTo("a"));
+        System.out.println("def".compareTo("abc"));
+        System.out.println("abc".compareTo("defas"));
+        System.out.println("defas".compareTo("abc"));
+        System.out.println("abc".compareTo("abc"));
+        
 
 //        int checkInt = randomInt(0, 1);
 //        empty_isEmptyHuh(checkInt);
