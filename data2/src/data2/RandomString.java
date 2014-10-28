@@ -13,6 +13,6 @@ public class RandomString implements RandomGenerator<String> {
         for (int i = 0; i < boom; i++) {
             stringy[i] = characters.charAt(rand.nextInt(characters.length()));
         }
-        return new String(stringy);
+        return stringy.toString();
     }
 }
