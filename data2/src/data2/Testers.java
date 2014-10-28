@@ -8,57 +8,57 @@ public class Testers {
         return new MT_FiniteBag();
     }
 
-    static Random rand = new Random();
-
-    public static int randomInt(int min, int max) {
-        return rand.nextInt((max - min) + 1) + min;
-    }
-
-    public static FiniteBag randomBag(int length) {
-        if (length == 0) {
-            return empty();
-        } else {
-            return randomBag(length - 1).add(randomInt(0, 100), randomInt(1, 10));
-        }
-    }
-
-    static int empty_isEmptyHuh = 0;
-    static int isEmptyHuh_cardinality = 0;
-
-    // Property testing~
-    // Empty and isEmptyHuh
-    public static void empty_isEmptyHuh(int count) throws Exception {
-        for (int i = 0; i < 50; i++) {
-            if (count == 0) {
-                FiniteBag e = empty();
-                if (!e.isEmptyHuh()) {
-                    throw new Exception("Test failed. MT bag is not MT");
-                }
-            } else {
-                int length = randomInt(1, 10);
-                FiniteBag n = randomBag(length);
-                if (n.isEmptyHuh()) {
-                    throw new Exception("Test failed. NonMT bag is MT");
-                }
-            }
-            empty_isEmptyHuh++;
-        }
-    }
-
-    // isEmptyHuh and cardinality
-    public static void isEmptyHuh_cardinality() throws Exception {
-        for (int i = 0; i < 50; i++) {
-            int length = randomInt(0, 10);
-            FiniteBag b = randomBag(length);
-            if (!b.isEmptyHuh() && (b.cardinality() == 0)) {
-                throw new Exception("Test failed. NonMT bag had card. = 0");
-            }
-            if (b.isEmptyHuh() && (b.cardinality() != 0)) {
-                throw new Exception("Test failed. MT ");
-            }
-            isEmptyHuh_cardinality++;
-        }
-    }
+//    static Random rand = new Random();
+//
+//    public static int randomInt(int min, int max) {
+//        return rand.nextInt((max - min) + 1) + min;
+//    }
+//
+//    public static FiniteBag randomBag(int length) {
+//        if (length == 0) {
+//            return empty();
+//        } else {
+//            return randomBag(length - 1).add(randomInt(0, 100), randomInt(1, 10));
+//        }
+//    }
+//
+//    static int empty_isEmptyHuh = 0;
+//    static int isEmptyHuh_cardinality = 0;
+//
+//    // Property testing~
+//    // Empty and isEmptyHuh
+//    public static void empty_isEmptyHuh(int count) throws Exception {
+//        for (int i = 0; i < 50; i++) {
+//            if (count == 0) {
+//                FiniteBag e = empty();
+//                if (!e.isEmptyHuh()) {
+//                    throw new Exception("Test failed. MT bag is not MT");
+//                }
+//            } else {
+//                int length = randomInt(1, 10);
+//                FiniteBag n = randomBag(length);
+//                if (n.isEmptyHuh()) {
+//                    throw new Exception("Test failed. NonMT bag is MT");
+//                }
+//            }
+//            empty_isEmptyHuh++;
+//        }
+//    }
+//
+//    // isEmptyHuh and cardinality
+//    public static void isEmptyHuh_cardinality() throws Exception {
+//        for (int i = 0; i < 50; i++) {
+//            int length = randomInt(0, 10);
+//            FiniteBag b = randomBag(length);
+//            if (!b.isEmptyHuh() && (b.cardinality() == 0)) {
+//                throw new Exception("Test failed. NonMT bag had card. = 0");
+//            }
+//            if (b.isEmptyHuh() && (b.cardinality() != 0)) {
+//                throw new Exception("Test failed. MT ");
+//            }
+//            isEmptyHuh_cardinality++;
+//        }
+//    }
     
 
     public static void main(String[] args) throws Exception {
@@ -260,12 +260,12 @@ public class Testers {
         System.out.println("=====================================");
         System.out.println();
 
-        int checkInt = randomInt(0, 1);
-        empty_isEmptyHuh(checkInt);
-        System.out.println("Tested empty_isEmptyHuh " + empty_isEmptyHuh + " times");
-
-        isEmptyHuh_cardinality();
-        System.out.println("Tested isEmptyHuh_cardinality " + isEmptyHuh_cardinality + " times");
+//        int checkInt = randomInt(0, 1);
+//        empty_isEmptyHuh(checkInt);
+//        System.out.println("Tested empty_isEmptyHuh " + empty_isEmptyHuh + " times");
+//
+//        isEmptyHuh_cardinality();
+//        System.out.println("Tested isEmptyHuh_cardinality " + isEmptyHuh_cardinality + " times");
 
     }
 
