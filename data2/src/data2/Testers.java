@@ -40,6 +40,7 @@ public class Testers<D extends Comparable> {
     static int member_diff = 0;
     static int equal_inter = 0;
     static int getCount_add_nCopies = 0;
+    static int getCount_remove_nCopies = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -214,7 +215,7 @@ public class Testers<D extends Comparable> {
             FiniteBag myBag = randomBag(length);
             FiniteBag yourBag = randomBag(length);
             if (myBag.diff(yourBag).member(x)) {
-                if (!yourBag.member(x) || myBag.member(x)) {
+                if (!yourBag.member(x)) {
                     throw new Exception("Test failed. X should be in yourBag");
                 }
             } else if (!yourBag.member(x) || myBag.member(x)) {
@@ -239,8 +240,8 @@ public class Testers<D extends Comparable> {
             equal_inter++;
         }
     }
-    
-    //getCount and add(nCopies ver)
+
+    // getCount and add(nCopies ver)
     public void getCount_add_nCopies() throws Exception {
         for (int i = 0; i < 50; i++) {
             int length = randomInt(0, 10);
@@ -254,7 +255,24 @@ public class Testers<D extends Comparable> {
             getCount_add_nCopies++;
         }
     }
-    
+
+    // getCount and remove(nCopies ver)
+    public void getCount_remove_nCopies() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            int randInt = randomInt(0, 10);
+            D x = jenny.giveMeAThing();
+            FiniteBag myBag = randomBag(length);
+            FiniteBag newBag = myBag.add(x, randInt);
+            int currentCount = newBag.getCount(x);
+            int max = Math.max(0, currentCount-randInt);
+            if (newBag.remove(x, randInt).getCount(x) != max) {
+                throw new Exception("Test failed. remove (n Copies) not working");
+            }
+            getCount_remove_nCopies++;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         // Random tests!!!
         System.out.println();
@@ -311,11 +329,15 @@ public class Testers<D extends Comparable> {
         myIntTests.equal_inter();
         myStringTests.equal_inter();
         System.out.println("Tested equal_inter " + equal_inter + " times successfully");
-        
+
         myIntTests.getCount_add_nCopies();
         myStringTests.getCount_add_nCopies();
         System.out.println("Tested getCount_add_nCopies " + getCount_add_nCopies + " times successfully");
-        
+
+        myIntTests.getCount_remove_nCopies();
+        myStringTests.getCount_remove_nCopies();
+        System.out.println("Tested getCount_remove_nCopies " + getCount_remove_nCopies
+                + " times successfully");
     }
 
 }
