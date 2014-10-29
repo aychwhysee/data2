@@ -34,6 +34,7 @@ public class Testers<D extends Comparable> {
 
     static int empty_isEmptyHuh = 0;
     static int isEmptyHuh_cardinality = 0;
+    static int cardinality_add = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -67,6 +68,22 @@ public class Testers<D extends Comparable> {
                 throw new Exception("Test failed. MT ");
             }
             isEmptyHuh_cardinality++;
+        }
+    }
+    
+    // cardinality and add
+    public void cardinality_add() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            FiniteBag myBag = randomBag(length);
+            int currentCard = myBag.cardinality();
+            if (myBag.add(jenny.giveMeAThing()).cardinality() != currentCard + 1) {
+                throw new Exception("Test failed. Not adding to card properly");
+            }
+            if (myBag.add(jenny.giveMeAThing()).cardinality() == currentCard) {
+                throw new Exception("Test failed. Not adding at all");
+            }
+        cardinality_add++;
         }
     }
 
@@ -289,6 +306,9 @@ public class Testers<D extends Comparable> {
         myStringTests.isEmptyHuh_cardinality();
         System.out.println("Tested isEmptyHuh_cardinality " + isEmptyHuh_cardinality + " times");
         
+        myIntTests.cardinality_add();
+        myStringTests.cardinality_add();
+        System.out.println("Tested cardinality_add " + cardinality_add + " times");
 
     }
 
