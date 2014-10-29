@@ -36,6 +36,7 @@ public class Testers<D extends Comparable> {
     static int add_member = 0;
     static int member_union = 0;
     static int union_getCount = 0;
+    static int union_subset = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -188,6 +189,20 @@ public class Testers<D extends Comparable> {
         }
     }
     
+    // union and subset
+    public void union_subset() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            FiniteBag myBag = randomBag(length);
+            FiniteBag yourBag = randomBag(length);
+            FiniteBag theirBag = randomBag(length);
+            if (myBag.union(yourBag).subset(theirBag) != myBag.subset(theirBag) && yourBag.subset(theirBag)) {
+                throw new Exception("Test failed. Check union_subset");
+            }
+            union_subset++;
+        }
+    }
+    
     public static void main(String[] args) throws Exception {
         // Random tests!!!
         System.out.println();
@@ -233,7 +248,9 @@ public class Testers<D extends Comparable> {
         myStringTests.union_getCount();
         System.out.println("Tested union_getCount " + union_getCount + " times successfully");
         
-        
+        myIntTests.union_subset();
+        myStringTests.union_subset();
+        System.out.println("Tested union_subset " + union_subset + " times successfully");
     
     
     }
