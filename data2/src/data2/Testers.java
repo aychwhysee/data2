@@ -3,8 +3,8 @@ package data2;
 import java.util.Random;
 
 public class Testers<D extends Comparable> {
-    
-    Testers (RandomGenerator<D> jenny) {
+
+    Testers(RandomGenerator<D> jenny) {
         this.jenny = jenny;
     }
 
@@ -37,6 +37,8 @@ public class Testers<D extends Comparable> {
     static int member_union = 0;
     static int union_getCount = 0;
     static int union_subset = 0;
+    static int member_diff = 0;
+    static int equal_inter = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -72,7 +74,7 @@ public class Testers<D extends Comparable> {
             isEmptyHuh_cardinality++;
         }
     }
-    
+
     // cardinality and add
     public void cardinality_add() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -85,10 +87,10 @@ public class Testers<D extends Comparable> {
             if (myBag.add(jenny.giveMeAThing()).cardinality() == currentCard) {
                 throw new Exception("Test failed. Not adding at all");
             }
-        cardinality_add++;
+            cardinality_add++;
         }
     }
-    
+
     // cardinality, remove, and getCount
     public void card_remove_getCount() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -96,7 +98,7 @@ public class Testers<D extends Comparable> {
             int length = randomInt(0, 10);
             FiniteBag myBag = randomBag(length);
             int newCard = myBag.remove(randomElt).cardinality();
-            if (myBag.getCount(randomElt) >= 1 && newCard != myBag.cardinality() -1) {
+            if (myBag.getCount(randomElt) >= 1 && newCard != myBag.cardinality() - 1) {
                 throw new Exception("Test failed. Cardinality didn't decrease by 1");
             }
             if (myBag.getCount(randomElt) == 0 && newCard != myBag.cardinality()) {
@@ -105,7 +107,7 @@ public class Testers<D extends Comparable> {
             card_remove_getCount++;
         }
     }
-    
+
     // At this point we know that add, remove, and getCount work. So we can test
     // for equal
     // add, remove, getCount, equal
@@ -121,7 +123,7 @@ public class Testers<D extends Comparable> {
             FiniteBag smallBag = biggerBag.remove(randomElt);
             if (smallBag.getCount(randomElt) != myBag.getCount(randomElt)) {
                 throw new Exception("Test failed. Count for randomElt didn't go back"
-                + "to what it was before");
+                        + "to what it was before");
             }
             if (!myBag.equal(smallBag)) {
                 throw new Exception("Test failed. myBag and smallBag should be equal");
@@ -129,7 +131,7 @@ public class Testers<D extends Comparable> {
             add_remove_getC_equal++;
         }
     }
-    
+
     // add and member
     public void add_member() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -151,7 +153,7 @@ public class Testers<D extends Comparable> {
             add_member++;
         }
     }
-    
+
     // member and union
     public void member_union() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -173,7 +175,7 @@ public class Testers<D extends Comparable> {
             member_union++;
         }
     }
-    
+
     // union and getCount
     public void union_getCount() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -183,12 +185,12 @@ public class Testers<D extends Comparable> {
             FiniteBag yourBag = randomBag(length);
             if (myBag.union(yourBag).getCount(x) != ((myBag.getCount(x)) + (yourBag.getCount(x)))) {
                 throw new Exception("Test failed. Union of myBag and yourBag should have"
-                + " the same count of x");
+                        + " the same count of x");
             }
             union_getCount++;
         }
     }
-    
+
     // union and subset
     public void union_subset() throws Exception {
         for (int i = 0; i < 50; i++) {
@@ -202,7 +204,41 @@ public class Testers<D extends Comparable> {
             union_subset++;
         }
     }
-    
+
+    // member and diff
+    public void member_diff() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            D x = jenny.giveMeAThing();
+            FiniteBag myBag = randomBag(length);
+            FiniteBag yourBag = randomBag(length);
+            if (myBag.diff(yourBag).member(x)) {
+                if (!yourBag.member(x) || myBag.member(x)) {
+                    throw new Exception("Test failed. X should be in yourBag");
+                }
+            } else if (!yourBag.member(x) || myBag.member(x)) {
+                // Thing works
+            } else {
+                throw new Exception("Test failed. Check again");
+            }
+            member_diff++;
+        }
+    }
+
+    // equal and inter
+    public void equal_inter() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            FiniteBag BagX = randomBag(length);
+            FiniteBag BagY = randomBag(length);
+            FiniteBag BagZ = BagX.union(BagY);
+            if (!BagX.inter(BagZ).equal(BagX) || !BagY.inter(BagZ).equal(BagY)) {
+                throw new Exception("Test failed. Check again");
+            }
+            equal_inter++;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         // Random tests!!!
         System.out.println();
@@ -211,7 +247,7 @@ public class Testers<D extends Comparable> {
         System.out.println("|   Containing Integers or Strings  |");
         System.out.println("=====================================");
         System.out.println();
-        
+
         Testers myIntTests = new Testers(new RandomInt());
         Testers myStringTests = new Testers(new RandomString());
 
@@ -223,11 +259,11 @@ public class Testers<D extends Comparable> {
         myIntTests.isEmptyHuh_cardinality();
         myStringTests.isEmptyHuh_cardinality();
         System.out.println("Tested isEmptyHuh_cardinality " + isEmptyHuh_cardinality + " times successfully");
-        
+
         myIntTests.cardinality_add();
         myStringTests.cardinality_add();
         System.out.println("Tested cardinality_add " + cardinality_add + " times successfully");
-        
+
         myIntTests.card_remove_getCount();
         myStringTests.card_remove_getCount();
         System.out.println("Tested card_remove_getCount " + card_remove_getCount + " times successfully");
@@ -235,24 +271,31 @@ public class Testers<D extends Comparable> {
         myIntTests.add_remove_getC_equal();
         myStringTests.add_remove_getC_equal();
         System.out.println("Tested add_remove_getC_equal " + add_remove_getC_equal + " times successfully");
-        
+
         myIntTests.add_member();
         myStringTests.add_member();
         System.out.println("Tested add_member " + add_member + " times successfully");
-        
+
         myIntTests.member_union();
         myStringTests.member_union();
         System.out.println("Tested member_union " + member_union + " times successfully");
-    
+
         myIntTests.union_getCount();
         myStringTests.union_getCount();
         System.out.println("Tested union_getCount " + union_getCount + " times successfully");
-        
+
         myIntTests.union_subset();
         myStringTests.union_subset();
         System.out.println("Tested union_subset " + union_subset + " times successfully");
-    
-    
+
+        myIntTests.member_diff();
+        myStringTests.member_diff();
+        System.out.println("Tested member_diff " + member_diff + " times successfully");
+
+        myIntTests.equal_inter();
+        myStringTests.equal_inter();
+        System.out.println("Tested equal_inter " + equal_inter + " times successfully");
+        
     }
 
 }
