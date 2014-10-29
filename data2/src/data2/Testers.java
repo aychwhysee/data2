@@ -35,6 +35,7 @@ public class Testers<D extends Comparable> {
     static int empty_isEmptyHuh = 0;
     static int isEmptyHuh_cardinality = 0;
     static int cardinality_add = 0;
+    static int card_remove_getCount = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -84,6 +85,23 @@ public class Testers<D extends Comparable> {
                 throw new Exception("Test failed. Not adding at all");
             }
         cardinality_add++;
+        }
+    }
+    
+    // cardinality, remove, and getCount
+    public void card_remove_getCount() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            D randomElt = jenny.giveMeAThing();
+            int length = randomInt(0, 10);
+            FiniteBag myBag = randomBag(length);
+            int newCard = myBag.remove(randomElt).cardinality();
+            if (myBag.getCount(randomElt) >= 1 && newCard != myBag.cardinality() -1) {
+                throw new Exception("Test failed. Cardinality didn't decrease by 1");
+            }
+            if (myBag.getCount(randomElt) == 0 && newCard != myBag.cardinality()) {
+                throw new Exception("Test failed. Cardinality should've stayed the same");
+            }
+            card_remove_getCount++;
         }
     }
 
@@ -309,6 +327,10 @@ public class Testers<D extends Comparable> {
         myIntTests.cardinality_add();
         myStringTests.cardinality_add();
         System.out.println("Tested cardinality_add " + cardinality_add + " times");
+        
+        myIntTests.card_remove_getCount();
+        myStringTests.card_remove_getCount();
+        System.out.println("Tested card_remove_getCount " + card_remove_getCount + " times");
 
     }
 
