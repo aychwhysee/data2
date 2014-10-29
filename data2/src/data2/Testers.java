@@ -39,6 +39,7 @@ public class Testers<D extends Comparable> {
     static int union_subset = 0;
     static int member_diff = 0;
     static int equal_inter = 0;
+    static int getCount_add_nCopies = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -238,7 +239,22 @@ public class Testers<D extends Comparable> {
             equal_inter++;
         }
     }
-
+    
+    //getCount and add(nCopies ver)
+    public void getCount_add_nCopies() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            D x = jenny.giveMeAThing();
+            FiniteBag myBag = randomBag(length);
+            FiniteBag newBag = myBag.add(x);
+            int currentCount = newBag.getCount(x);
+            if (newBag.add(x, length).getCount(x) != currentCount + length) {
+                throw new Exception("Test failed. Didn't add the right amount");
+            }
+            getCount_add_nCopies++;
+        }
+    }
+    
     public static void main(String[] args) throws Exception {
         // Random tests!!!
         System.out.println();
@@ -295,6 +311,10 @@ public class Testers<D extends Comparable> {
         myIntTests.equal_inter();
         myStringTests.equal_inter();
         System.out.println("Tested equal_inter " + equal_inter + " times successfully");
+        
+        myIntTests.getCount_add_nCopies();
+        myStringTests.getCount_add_nCopies();
+        System.out.println("Tested getCount_add_nCopies " + getCount_add_nCopies + " times successfully");
         
     }
 
