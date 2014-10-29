@@ -36,6 +36,7 @@ public class Testers<D extends Comparable> {
     static int isEmptyHuh_cardinality = 0;
     static int cardinality_add = 0;
     static int card_remove_getCount = 0;
+    static int add_remove_getC_equal = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -102,6 +103,30 @@ public class Testers<D extends Comparable> {
                 throw new Exception("Test failed. Cardinality should've stayed the same");
             }
             card_remove_getCount++;
+        }
+    }
+    
+    // At this point we know that add, remove, and getCount work. So we can test
+    // for equal
+    // add, remove, getCount, equal
+    public void add_remove_getC_equal() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            D randomElt = jenny.giveMeAThing();
+            int length = randomInt(0, 10);
+            FiniteBag myBag = randomBag(length);
+            FiniteBag biggerBag = myBag.add(randomElt);
+            if (biggerBag.getCount(randomElt) - 1 != myBag.getCount(randomElt)) {
+                throw new Exception("Test failed. Count for randomElt didn't go up by 1");
+            }
+            FiniteBag smallBag = biggerBag.remove(randomElt);
+            if (smallBag.getCount(randomElt) != myBag.getCount(randomElt)) {
+                throw new Exception("Test failed. Count for randomElt didn't go back"
+                + "to what it was before");
+            }
+            if (!myBag.equal(smallBag)) {
+                throw new Exception("Test failed. myBag and smallBag should be equal");
+            }
+            add_remove_getC_equal++;
         }
     }
 
@@ -332,6 +357,9 @@ public class Testers<D extends Comparable> {
         myStringTests.card_remove_getCount();
         System.out.println("Tested card_remove_getCount " + card_remove_getCount + " times");
 
+        myIntTests.add_remove_getC_equal();
+        myStringTests.add_remove_getC_equal();
+        System.out.println("Tested add_remove_getC_equal " + add_remove_getC_equal + " times");
     }
 
 }
