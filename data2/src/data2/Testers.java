@@ -41,6 +41,7 @@ public class Testers<D extends Comparable> {
     static int equal_inter = 0;
     static int getCount_add_nCopies = 0;
     static int getCount_remove_nCopies = 0;
+    static int member_removeAll_getC = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -265,11 +266,29 @@ public class Testers<D extends Comparable> {
             FiniteBag myBag = randomBag(length);
             FiniteBag newBag = myBag.add(x, randInt);
             int currentCount = newBag.getCount(x);
-            int max = Math.max(0, currentCount-randInt);
+            int max = Math.max(0, currentCount - randInt);
             if (newBag.remove(x, randInt).getCount(x) != max) {
                 throw new Exception("Test failed. remove (n Copies) not working");
             }
             getCount_remove_nCopies++;
+        }
+    }
+
+    // member, removeAll, and getCount
+    public void member_removeAll_getC() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            int randInt = randomInt(0, 10);
+            D x = jenny.giveMeAThing();
+            FiniteBag myBag = randomBag(length);
+            FiniteBag newBag = myBag.add(x, randInt);
+            if (newBag.removeAll(x).member(x)) {
+                throw new Exception("Test failed. X should not be in newBag");
+            }
+            if (newBag.removeAll(x).getCount(x) != 0) {
+                throw new Exception("Test failed. X count should be 0");
+            }
+            member_removeAll_getC++;
         }
     }
 
@@ -337,6 +356,11 @@ public class Testers<D extends Comparable> {
         myIntTests.getCount_remove_nCopies();
         myStringTests.getCount_remove_nCopies();
         System.out.println("Tested getCount_remove_nCopies " + getCount_remove_nCopies
+                + " times successfully");
+
+        myIntTests.member_removeAll_getC();
+        myStringTests.member_removeAll_getC();
+        System.out.println("Tested member_removeAll_getC " + member_removeAll_getC
                 + " times successfully");
     }
 
