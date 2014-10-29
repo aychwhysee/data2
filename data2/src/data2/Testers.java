@@ -37,6 +37,7 @@ public class Testers<D extends Comparable> {
     static int cardinality_add = 0;
     static int card_remove_getCount = 0;
     static int add_remove_getC_equal = 0;
+    static int add_member = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -129,7 +130,29 @@ public class Testers<D extends Comparable> {
             add_remove_getC_equal++;
         }
     }
-
+    
+    // add and member
+    public void add_member() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            D x = jenny.giveMeAThing();
+            D y = jenny.giveMeAThing();
+            int length = randomInt(0, 10);
+            FiniteBag myBag = randomBag(length);
+            if (myBag.add(x).member(y)) {
+                if (x.compareTo(y) == 0 || myBag.member(y)) {
+                    // It works
+                } else {
+                    throw new Exception("Test failed. Y should not be in myBag");
+                }
+            } else {
+                if (x.compareTo(y) == 0 || myBag.member(y)) {
+                    throw new Exception("Test failed. Check add_member again");
+                }
+            }
+            add_member++;
+        }
+    }
+    
     public static void main(String[] args) throws Exception {
 //        //Hard-coded tests for now:
 //
@@ -360,6 +383,10 @@ public class Testers<D extends Comparable> {
         myIntTests.add_remove_getC_equal();
         myStringTests.add_remove_getC_equal();
         System.out.println("Tested add_remove_getC_equal " + add_remove_getC_equal + " times");
+        
+        myIntTests.add_member();
+        myStringTests.add_member();
+        System.out.println("Tested add_member " + add_member + " times");
     }
 
 }
