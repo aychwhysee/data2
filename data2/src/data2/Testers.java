@@ -2,10 +2,6 @@ package data2;
 
 import java.util.Random;
 
-// interface randomGenerator
-// - method giveMeThings
-// - Another class implements the above. For each data type (int, string, etc)
-// - Would have method giveMeThings to give random Ints, Strings, etc.
 public class Testers<D extends Comparable> {
     
     Testers (RandomGenerator<D> jenny) {
@@ -39,6 +35,7 @@ public class Testers<D extends Comparable> {
     static int add_remove_getC_equal = 0;
     static int add_member = 0;
     static int member_union = 0;
+    static int union_getCount = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -154,6 +151,7 @@ public class Testers<D extends Comparable> {
         }
     }
     
+    // member and union
     public void member_union() throws Exception {
         for (int i = 0; i < 50; i++) {
             int length = randomInt(0, 10);
@@ -172,6 +170,21 @@ public class Testers<D extends Comparable> {
                 }
             }
             member_union++;
+        }
+    }
+    
+    // union and getCount
+    public void union_getCount() throws Exception {
+        for (int i = 0; i < 50; i++) {
+            int length = randomInt(0, 10);
+            D x = jenny.giveMeAThing();
+            FiniteBag myBag = randomBag(length);
+            FiniteBag yourBag = randomBag(length);
+            if (myBag.union(yourBag).getCount(x) != ((myBag.getCount(x)) + (yourBag.getCount(x)))) {
+                throw new Exception("Test failed. Union of myBag and yourBag should have"
+                + " the same count of x");
+            }
+            union_getCount++;
         }
     }
     
@@ -215,6 +228,14 @@ public class Testers<D extends Comparable> {
         myIntTests.member_union();
         myStringTests.member_union();
         System.out.println("Tested member_union " + member_union + " times successfully");
+    
+        myIntTests.union_getCount();
+        myStringTests.union_getCount();
+        System.out.println("Tested union_getCount " + union_getCount + " times successfully");
+        
+        
+    
+    
     }
 
 }
