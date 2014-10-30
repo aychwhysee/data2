@@ -33,15 +33,15 @@ public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
     }
     
     public FiniteBag remove(D elt) {
-        // Boop? *** why don't we need a self-balancing mechanism for remove?
+        return next.remove(elt, 1);
     }
     
     public FiniteBag remove(D elt, int nCopies) {
-        // Boop? Above
+        return next.remove(elt, nCopies);
     }
     
     public FiniteBag removeAll(D elt) {
-        // boop? above
+        return next.removeAll(elt);
     }
     
     public FiniteBag union(FiniteBag u) {
