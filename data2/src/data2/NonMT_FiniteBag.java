@@ -75,13 +75,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag add(D elt) {
-        if (elt.compareTo(this.root) == 0) {
-            return new NonMT_FiniteBag(this.left, this.root, this.count + 1, this.right);
-        } else if (elt.compareTo(this.root) < 0) {
-            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.count, this.right);
-        } else {
-            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt));
-        }
+//        if (elt.compareTo(this.root) == 0) {
+//            return new NonMT_FiniteBag(this.left, this.root, this.count + 1, this.right);
+//        } else if (elt.compareTo(this.root) < 0) {
+//            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.count, this.right);
+//        } else {
+//            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt));
+//        }
+        return this.add(elt, 1);
         // Need to make it self-balancing now...?
     }
 

@@ -2,7 +2,7 @@ package data2;
 
 public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
     
-    FiniteBag next;
+    FiniteBag<D> next;
     
     NonMT_FiniteBagT1(FiniteBag next) {
         this.next = next;
