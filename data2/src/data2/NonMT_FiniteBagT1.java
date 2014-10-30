@@ -2,7 +2,7 @@ package data2;
 
 public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
     
-    FiniteBag<D> next;
+    FiniteBag next;
     
     NonMT_FiniteBagT1(FiniteBag next) {
         this.next = next;
@@ -25,7 +25,8 @@ public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
     }
     
     public FiniteBag add(D elt) {
-        // Boop
+        // Boop -- replacing add and the add below with smartAdd stuff?
+        // Does the same apply to all the other FiniteBag classes? 
     }
     
     public FiniteBag add(D elt, int nCopies) {
