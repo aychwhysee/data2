@@ -10,24 +10,24 @@ public interface FiniteBag<D extends Comparable> {
 
     public boolean member(D elt);
 
-    public FiniteBag add(D elt);
+    public FiniteBag<D> add(D elt);
 
-    public FiniteBag add(D elt, int nCopies); //Adds n occurences of elt
+    public FiniteBag<D> add(D elt, int nCopies); //Adds n occurences of elt
 
-    public FiniteBag remove(D elt);
+    public FiniteBag<D> remove(D elt);
 
-    public FiniteBag remove(D elt, int nCopies); // Removes n occurences of elt
+    public FiniteBag<D> remove(D elt, int nCopies); // Removes n occurences of elt
 
-    public FiniteBag removeAll(D elt); //Removes _all_ occurences of an element
+    public FiniteBag<D> removeAll(D elt); //Removes _all_ occurences of an element
 
-    public FiniteBag union(FiniteBag u);
+    public FiniteBag<D> union(FiniteBag<D> u);
 
-    public FiniteBag inter(FiniteBag u);
+    public FiniteBag<D> inter(FiniteBag<D> u);
 
-    public FiniteBag diff(FiniteBag u);
+    public FiniteBag<D> diff(FiniteBag<D> u);
 
-    public boolean equal(FiniteBag u);
+    public boolean equal(FiniteBag<D> u);
 
-    public boolean subset(FiniteBag u);
+    public boolean subset(FiniteBag<D> u);
 
 }

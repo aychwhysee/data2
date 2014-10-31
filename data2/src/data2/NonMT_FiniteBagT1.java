@@ -2,9 +2,9 @@ package data2;
 
 public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
     
-    FiniteBag next;
+    FiniteBag<D> next;
     
-    NonMT_FiniteBagT1(FiniteBag next) {
+    NonMT_FiniteBagT1(FiniteBag<D> next) {
         this.next = next;
     }
     
@@ -24,44 +24,44 @@ public class NonMT_FiniteBagT1<D extends Comparable> implements FiniteBag<D> {
         return next.member(elt);
     }
     
-    public FiniteBag add(D elt) {
+    public FiniteBag<D> add(D elt) {
         // Boop -- replacing add and the add below with smartAdd stuff?
         // Does the same apply to all the other FiniteBag classes? 
     }
     
-    public FiniteBag add(D elt, int nCopies) {
+    public FiniteBag<D> add(D elt, int nCopies) {
         // Boop
     }
     
-    public FiniteBag remove(D elt) {
+    public FiniteBag<D> remove(D elt) {
         return next.remove(elt, 1);
     }
     
-    public FiniteBag remove(D elt, int nCopies) {
+    public FiniteBag<D> remove(D elt, int nCopies) {
         return next.remove(elt, nCopies);
     }
     
-    public FiniteBag removeAll(D elt) {
+    public FiniteBag<D> removeAll(D elt) {
         return next.removeAll(elt);
     }
     
-    public FiniteBag union(FiniteBag u) {
+    public FiniteBag<D> union(FiniteBag<D> u) {
         return next.union(u);
     }
     
-    public FiniteBag inter(FiniteBag u) {
+    public FiniteBag<D> inter(FiniteBag<D> u) {
         return next.inter(u);
     }
     
-    public FiniteBag diff(FiniteBag u) {
+    public FiniteBag<D> diff(FiniteBag<D> u) {
         return next.diff(u);
     }
     
-    public boolean equal(FiniteBag u) {
+    public boolean equal(FiniteBag<D> u) {
         return next.equal(u);
     }
     
-    public boolean subset(FiniteBag u) {
+    public boolean subset(FiniteBag<D> u) {
         return next.subset(u);
     }
 }

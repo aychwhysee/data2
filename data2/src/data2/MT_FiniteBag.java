@@ -26,51 +26,51 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         return false;
     }
 
-    public FiniteBag add(D elt) {
+    public FiniteBag<D> add(D elt) {
         // Since this is always empty, we just need to make a new NonMT bag
         // with elt as the only element in the bag
         return new NonMT_FiniteBag(elt, 1);
     }
 
-    public FiniteBag add(D elt, int nCopies) {
+    public FiniteBag<D> add(D elt, int nCopies) {
         return new NonMT_FiniteBag(elt, nCopies);
     }
 
-    public FiniteBag remove(D elt) {
+    public FiniteBag<D> remove(D elt) {
         // Removing from an empty bag should just return the original empty bag
         return this;
     }
 
-    public FiniteBag remove(D elt, int nCopies) {
+    public FiniteBag<D> remove(D elt, int nCopies) {
         return this;
     }
 
-    public FiniteBag removeAll(D elt) {
+    public FiniteBag<D> removeAll(D elt) {
         // Same reasoning as above
         return this;
     }
 
-    public FiniteBag union(FiniteBag u) {
+    public FiniteBag<D> union(FiniteBag<D> u) {
         // Since this is MT, just return u
         return u;
     }
 
-    public FiniteBag inter(FiniteBag u) {
+    public FiniteBag<D> inter(FiniteBag<D> u) {
         // Intersection of MT and anything is just MT
         return this;
     }
 
-    public FiniteBag diff(FiniteBag u) {
+    public FiniteBag<D> diff(FiniteBag<D> u) {
         // Diff between bag U and MT this is U
         return u;
     }
 
-    public boolean equal(FiniteBag u) {
+    public boolean equal(FiniteBag<D> u) {
         // if u is empty, this it is equal to this(MT)
         return u.isEmptyHuh();
     }
 
-    public boolean subset(FiniteBag u) {
+    public boolean subset(FiniteBag<D> u) {
         // MT bag is always a subset of another bag (right?)
         return true;
     }
