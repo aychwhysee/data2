@@ -1,6 +1,6 @@
 package data2;
 
-public class FakeBag3<D extends Comparable> {
+public class FakeBag3<D extends Comparable> implements FakeBag<D>{
 
     D root1; //K1
     D root2; //K2

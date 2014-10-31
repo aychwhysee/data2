@@ -1,6 +1,6 @@
 package data2;
 
-public class FakeBagL<D extends Comparable> {
+public class FakeBagL<D extends Comparable> implements FakeBag<D>{
     
     D root;
     int count;
