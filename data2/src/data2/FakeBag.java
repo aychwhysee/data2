@@ -13,4 +13,13 @@ public interface FakeBag<D extends Comparable> {
     
     //What do I put in this interface?
     
+//            ___
+//         ___)  |_
+//     .-*'         '*-,
+//    /     /|   |\     \
+//    ;    /_|   |_\     ;
+//    ; |\            /| ;
+//    ; | ''--...--''  | ;
+//    \ ''---.....--''' /
+//     ''*-.,______,.-*'
 }
