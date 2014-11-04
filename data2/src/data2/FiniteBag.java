@@ -1,6 +1,6 @@
 package data2;
 
-public interface FiniteBag<D extends Comparable> {
+public interface FiniteBag<D extends Comparable> extends Sequenced<D>{
 
     public int cardinality();
 
@@ -29,5 +29,7 @@ public interface FiniteBag<D extends Comparable> {
     public boolean equal(FiniteBag<D> u);
 
     public boolean subset(FiniteBag<D> u);
+    
+    public Sequence<D> seq();
 
 }

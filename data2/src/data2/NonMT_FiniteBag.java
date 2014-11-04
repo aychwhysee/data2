@@ -178,5 +178,9 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         return (u.getCount(root) >= this.getCount(root))
                 && this.left.union(this.right).subset(u);
     }
+    
+    public Sequence<D> seq() {
+        return new NonMT_Sequence(root, count, (new Cat_Sequence(left.seq(),right.seq())));
+    }
 
 }

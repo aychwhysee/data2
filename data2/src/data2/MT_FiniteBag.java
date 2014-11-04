@@ -74,5 +74,9 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         // MT bag is always a subset of another bag (right?)
         return true;
     }
+    
+    public Sequence<D> seq() {
+        return new MT_Sequence();
+    }
 
 }
