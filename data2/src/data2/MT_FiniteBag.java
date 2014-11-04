@@ -78,5 +78,13 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     public Sequence<D> seq() {
         return new MT_Sequence();
     }
+    
+    public int sumIt() {
+        return sumItS(this.seq());
+    }
+    
+    public int sumItS(Sequence<D> as) {
+        return 0;
+    }
 
 }

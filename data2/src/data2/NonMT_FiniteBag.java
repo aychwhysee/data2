@@ -182,5 +182,18 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     public Sequence<D> seq() {
         return new NonMT_Sequence(root, count, (new Cat_Sequence(left.seq(),right.seq())));
     }
+    
+    public int sumIt() {
+        return sumItS(this.seq());
+    }
+    
+    public int sumItS(Sequence<D> as) {
+        int sum = 0;
+        while (as.hasNext()) {
+            sum = sum + 1;
+            as = as.next();
+        }
+        return sum;
+    }
 
 }
