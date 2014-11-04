@@ -1,21 +1,22 @@
 package data2;
 
 public class MT_Sequence<D extends Comparable> implements Sequence<D> {
-    
-    MT_Sequence() {}
-    
+
+    MT_Sequence() {
+    }
+
     public D here() {
         return null; //throw exception later
     }
-    
+
     public boolean hasNext() {
         return false;
     }
-    
+
     public Sequence<D> next() {
         return this;
     }
-    
+
     public String toStringS() {
         return "";
     }
