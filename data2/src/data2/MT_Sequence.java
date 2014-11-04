@@ -1,15 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package data2;
 
-/**
- *
- * @author Harry
- */
-public class MT_Sequence {
+public class MT_Sequence<D extends Comparable> implements Sequence<D> {
     
+    MT_Sequence() {}
+    
+    public D here() {
+        return null; //throw exception later
+    }
+    
+    public boolean hasNext() {
+        return false;
+    }
+    
+    public Sequence<D> next() {
+        return this;
+    }
+    
+    public String toStringS() {
+        return "";
+    }
 }
