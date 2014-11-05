@@ -1,7 +1,7 @@
 package data2;
 
 public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
-    
+
     boolean isRedHuh;
 
     MT_FiniteBag() {
@@ -22,8 +22,6 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         return true;
     }
 
-    // Wants "Object" instead of "D". Why? Also for the other ones that
-    // take in data type <D>.
     public boolean member(D elt) {
         // MT_FiniteBag is always MT, no members, return false
         return false;
@@ -89,19 +87,19 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     public int sumItS(Sequence<D> as) {
         return 0;
     }
-    
+
     public FiniteBag<D> RBInsert(D elt, int count) {
         return this.RBInsertInner(elt, count).blacken();
     }
-    
+
     public FiniteBag<D> RBInsertInner(D elt, int count) {
         return new NonMT_FiniteBag(elt, count);
     }
-    
+
     public FiniteBag<D> blacken() {
         return this;
     }
-    
+
     public boolean isRedHuh() {
         return isRedHuh;
     }

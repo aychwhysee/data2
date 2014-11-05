@@ -65,9 +65,6 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public boolean isEmptyHuh() {
-        // NonMT bag is NonMT. Return false.
-        //return false;
-        // ^ the above is no longer valid
         if (this.getCount(root) == 0) {
             if (!left.isEmptyHuh()) {
                 return right.isEmptyHuh();
@@ -90,15 +87,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag<D> add(D elt) {
-//        if (elt.compareTo(this.root) == 0) {
-//            return new NonMT_FiniteBag(this.left, this.root, this.count + 1, this.right);
-//        } else if (elt.compareTo(this.root) < 0) {
-//            return new NonMT_FiniteBag(this.left.add(elt), this.root, this.count, this.right);
-//        } else {
-//            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt));
-//        }
         return this.add(elt, 1);
-        // Need to make it self-balancing now...?
     }
 
     public FiniteBag<D> add(D elt, int nCopies) {
@@ -112,34 +101,11 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag<D> remove(D elt) {
-//        if (elt.compareTo(this.root) == 0) {
-////            if (this.count == 1) {
-////                // If completely removing an elt, return union of left and right
-////                return left.union(right);
-////                // If more than one of the elt exists, drop count by 1
-////            } else {
-//            return new NonMT_FiniteBag(this.left, this.root, this.count - 1, this.right);
-////          }
-//        } else if (elt.compareTo(this.root) < 0) {
-//            return new NonMT_FiniteBag(this.left.remove(elt), this.root, this.count, this.right);
-//        } else {
-//            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.remove(elt));
-//        }
         return this.remove(elt, 1);
     }
 
     public FiniteBag<D> remove(D elt, int nCopies) {
-//        int max = Math.max(0, this.count-nCopies); <-- only helps if you're
-        // going to set count to 0? But that doesn't fully remove the elt...
         if (elt.compareTo(this.root) == 0) {
-            // If nCopies will make the count go into the negatives or 0,
-            // completely remove the elt from the bag
-//            if (this.count <= nCopies) {
-//                return left.union(right);
-//                // else just do the do
-//            } else {
-//                return new NonMT_FiniteBag(this.left, this.root, this.count - nCopies, this.right);
-//            }
             int max = Math.max(0, this.count - nCopies);
             return new NonMT_FiniteBag(this.left, this.root, max, this.right);
         } else if (elt.compareTo(this.root) < 0) {
@@ -168,13 +134,6 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         if (u.member(this.root)) {
             int min = Math.min(u.getCount(root), this.getCount(root));
             return new NonMT_FiniteBag(this.left.inter(u), this.root, min, this.right.inter(u));
-//            if (u.getCount(root) > this.getCount(root)) {
-//                return new NonMT_FiniteBag(this.left.inter(u), this.root, this.getCount(root),
-//                        this.right.inter(u));
-//            } else {
-//                return new NonMT_FiniteBag(this.left.inter(u), this.root, u.getCount(root),
-//                        this.right.inter(u));
-//            }
         } else {
             return this.left.inter(u).union(this.right.inter(u));
         }
