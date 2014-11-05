@@ -35,5 +35,12 @@ public interface FiniteBag<D extends Comparable> extends Sequenced<D> {
     public int sumIt();
 
     public int sumItS(Sequence<D> as);
+    
+    public FiniteBag<D> RBInsert(D elt, int count);
+    
+    public FiniteBag<D> RBInsertInner(D elt, int count);
+    // ^ this replaces the add(D elt, int nCopies) method????
+    
+    public FiniteBag<D> blacken();
 
 }

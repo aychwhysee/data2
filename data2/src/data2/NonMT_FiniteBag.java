@@ -6,10 +6,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     FiniteBag<D> left;
     FiniteBag<D> right;
     int count;
-    boolean color;
-    
-    final boolean RED = true;
-    final boolean BLACK = false;
+    boolean isRedHuh;
 
     NonMT_FiniteBag(D root) {
         this.root = root;
@@ -21,9 +18,11 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     NonMT_FiniteBag(D root, int count) {
         this.root = root;
         this.count = count;
+        this.isRedHuh = true;
         this.left = new MT_FiniteBag();
         this.right = new MT_FiniteBag();
     }
+    
 
     NonMT_FiniteBag(FiniteBag<D> left, D root, FiniteBag<D> right) {
         this.left = left;
@@ -40,7 +39,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
     
     NonMT_FiniteBag(boolean color, FiniteBag<D> left, D root, int count, FiniteBag<D> right) {
-        this.color = color;
+        this.isRedHuh = color;
         this.left = left;
         this.root = root;
         this.count = count;
