@@ -170,6 +170,20 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         }
         return sum;
     }
+    
+    public String stringIt() {
+        return stringItS(this.seq());
+    }
+    
+    public String stringItS(Sequence<D> as) {
+        StringBuffer sb = new StringBuffer("");
+        while (as.hasNext()) {
+            sb.append(as.next().toStringS());
+            sb.append(" ");
+            as = as.next();
+        }
+        return sb.toString();
+    }
 
     public boolean isRedHuh() {
         return isRedHuh;

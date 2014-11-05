@@ -87,6 +87,14 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     public int sumItS(Sequence<D> as) {
         return 0;
     }
+    
+    public String stringIt() {
+        return stringItS(this.seq());
+    }
+    
+    public String stringItS(Sequence<D> as) {
+        return "";
+    }
 
     public FiniteBag<D> RBInsert(D elt, int count) {
         return this.RBInsertInner(elt, count).blacken();

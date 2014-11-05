@@ -1,6 +1,6 @@
 package data2;
 
-public class Cat_Sequence<D extends Comparable> implements Sequence<D> {
+public class Cat_Sequence<D extends Comparable> implements Sequence<D>, Sequenced<D> {
 
     Sequence<D> left;
     Sequence<D> right;
@@ -32,5 +32,9 @@ public class Cat_Sequence<D extends Comparable> implements Sequence<D> {
 
     public String toStringS() {
         return this.left.toStringS() + " " + this.right.toStringS();
+    }
+    
+    public Sequence<D> seq() {
+        return this;
     }
 }

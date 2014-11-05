@@ -1,6 +1,6 @@
 package data2;
 
-public class MT_Sequence<D extends Comparable> implements Sequence<D> {
+public class MT_Sequence<D extends Comparable> implements Sequence<D>, Sequenced<D> {
 
     MT_Sequence() {
     }
@@ -19,5 +19,9 @@ public class MT_Sequence<D extends Comparable> implements Sequence<D> {
 
     public String toStringS() {
         return "";
+    }
+    
+    public Sequence<D> seq() {
+        return this;
     }
 }

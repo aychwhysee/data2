@@ -42,7 +42,7 @@ public class Testers<D extends Comparable> {
     static int getCount_add_nCopies = 0;
     static int getCount_remove_nCopies = 0;
     static int member_removeAll_getC = 0;
-    static int seq_cardinality = 0;
+    static int sumIt_cardinality = 0;
 
     // Property testing~
     // Empty and isEmptyHuh
@@ -293,7 +293,7 @@ public class Testers<D extends Comparable> {
         }
     }
 
-    public void seq_cardinality() throws Exception {
+    public void sumIt_cardinality() throws Exception {
         for (int i = 0; i < 50; i++) {
             int length = randomInt(0, 10);
             FiniteBag myBag = randomBag(length);
@@ -301,8 +301,16 @@ public class Testers<D extends Comparable> {
                 throw new Exception("Test failed. Seq doesn't return the same as"
                         + "+ cardinality");
             }
-            seq_cardinality++;
+            sumIt_cardinality++;
         }
+    }
+    
+    public void stringIt_print() throws Exception {
+        for (int i = 0; i < 10; i++) {
+            int length = randomInt(0,10);
+            FiniteBag myBag = randomBag(length);
+            System.out.println("stringing: " + myBag.stringIt());
+    }
     }
 
     public static void main(String[] args) throws Exception {
@@ -376,10 +384,13 @@ public class Testers<D extends Comparable> {
         System.out.println("Tested member_removeAll_getC " + member_removeAll_getC
                 + " times successfully");
 
-        myIntTests.seq_cardinality();
-        myStringTests.seq_cardinality();
-        System.out.println("Tested seq_cardinality " + seq_cardinality
+        myIntTests.sumIt_cardinality();
+        myStringTests.sumIt_cardinality();
+        System.out.println("Tested seq_cardinality " + sumIt_cardinality
                 + " times successfully");
+        
+        myIntTests.stringIt_print();
+        myStringTests.stringIt_print();
     }
 
 }
