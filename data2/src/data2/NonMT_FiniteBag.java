@@ -91,13 +91,14 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     }
 
     public FiniteBag<D> add(D elt, int nCopies) {
-        if (elt.compareTo(this.root) == 0) {
-            return new NonMT_FiniteBag(this.left, this.root, this.count + nCopies, this.right);
-        } else if (elt.compareTo(this.root) < 0) {
-            return new NonMT_FiniteBag(this.left.add(elt, nCopies), this.root, this.count, this.right);
-        } else {
-            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt, nCopies));
-        }
+//        if (elt.compareTo(this.root) == 0) {
+//            return new NonMT_FiniteBag(this.left, this.root, this.count + nCopies, this.right);
+//        } else if (elt.compareTo(this.root) < 0) {
+//            return new NonMT_FiniteBag(this.left.add(elt, nCopies), this.root, this.count, this.right);
+//        } else {
+//            return new NonMT_FiniteBag(this.left, this.root, this.count, this.right.add(elt, nCopies));
+//        }
+        return RBInsert(elt, nCopies);
     }
 
     public FiniteBag<D> remove(D elt) {
@@ -183,10 +184,10 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
             return new NonMT_FiniteBag(this.isRedHuh, this.left, this.root, this.count + count, this.right);
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.isRedHuh, this.left.RBInsertInner(elt, count),
-                    this.root, this.count, this.right).balance();
+                    this.root, this.count, this.right)/*.balance()*/;
         } else {
             return new NonMT_FiniteBag(this.isRedHuh, this.left, this.root,
-                    this.count, this.right.RBInsert(elt, count)).balance();
+                    this.count, this.right.RBInsert(elt, count))/*.balance()*/;
         }
     }
 
