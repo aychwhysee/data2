@@ -42,5 +42,7 @@ public interface FiniteBag<D extends Comparable> extends Sequenced<D> {
     // ^ this replaces the add(D elt, int nCopies) method????
     
     public FiniteBag<D> blacken();
+    
+    public boolean isRedHuh();
 
 }

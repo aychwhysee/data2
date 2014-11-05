@@ -1,8 +1,11 @@
 package data2;
 
 public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
+    
+    boolean isRedHuh;
 
     MT_FiniteBag() {
+        this.isRedHuh = false;
     }
 
     public int cardinality() {
@@ -97,6 +100,10 @@ public class MT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
     
     public FiniteBag<D> blacken() {
         return this;
+    }
+    
+    public boolean isRedHuh() {
+        return isRedHuh;
     }
 
 }

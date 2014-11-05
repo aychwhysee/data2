@@ -15,6 +15,11 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         this.right = new MT_FiniteBag();
     }
 
+    NonMT_FiniteBag(boolean isRedHuh) {
+        this.isRedHuh = isRedHuh;
+
+    }
+
     NonMT_FiniteBag(D root, int count) {
         this.root = root;
         this.count = count;
@@ -22,7 +27,6 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         this.left = new MT_FiniteBag();
         this.right = new MT_FiniteBag();
     }
-    
 
     NonMT_FiniteBag(FiniteBag<D> left, D root, FiniteBag<D> right) {
         this.left = left;
@@ -37,7 +41,7 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         this.count = count;
         this.right = right;
     }
-    
+
     NonMT_FiniteBag(boolean color, FiniteBag<D> left, D root, int count, FiniteBag<D> right) {
         this.isRedHuh = color;
         this.left = left;
@@ -206,25 +210,88 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         }
         return sum;
     }
-    
+
+    public boolean isRedHuh() {
+        return isRedHuh;
+    }
+
     public FiniteBag<D> RBInsert(D elt, int count) {
         return this.RBInsertInner(elt, count).blacken();
     }
-    
+
     public FiniteBag<D> RBInsertInner(D elt, int count) {
         if (elt.compareTo(this.root) == 0) {
             return new NonMT_FiniteBag(this.isRedHuh, this.left, this.root, this.count + count, this.right);
         } else if (elt.compareTo(this.root) < 0) {
             return new NonMT_FiniteBag(this.isRedHuh, this.left.RBInsertInner(elt, count),
-            this.root, this.count, this.right).balance();
+                    this.root, this.count, this.right).balance();
         } else {
-            return new NonMT_FiniteBag(this.isRedHuh, this.left, this. root,
-            this.count, this.right.RBInsert(elt, count)).balance();
+            return new NonMT_FiniteBag(this.isRedHuh, this.left, this.root,
+                    this.count, this.right.RBInsert(elt, count)).balance();
         }
     }
-    
+
     public FiniteBag<D> blacken() {
-        return new NonMT_FiniteBag(false, this.left, this.root, this.count, this. right);
+        return new NonMT_FiniteBag(false, this.left, this.root, this.count, this.right);
+    }
+
+    public FiniteBag<D> balance() {
+        NonMT_FiniteBag lefty;
+        NonMT_FiniteBag leftyleft;
+        NonMT_FiniteBag leftyright;
+        NonMT_FiniteBag righty;
+        NonMT_FiniteBag rightyleft;
+        NonMT_FiniteBag rightyright;
+
+        if (!this.isRedHuh() && (this.left instanceof NonMT_FiniteBag)
+                && ((NonMT_FiniteBag) this.left).isRedHuh()
+                && ((NonMT_FiniteBag) this.left).left.isRedHuh()) {
+            lefty = ((NonMT_FiniteBag) this.left);
+            leftyleft = ((NonMT_FiniteBag) lefty.left);
+            return new NonMT_FiniteBag(
+                    true,
+                    new NonMT_FiniteBag(false, leftyleft.left, leftyleft.root, leftyleft.count, leftyleft.right),
+                    lefty.root,
+                    lefty.count,
+                    new NonMT_FiniteBag(false, leftyleft.right, this.root, this.count, this.right));
+        } else if (!this.isRedHuh() && (this.left instanceof NonMT_FiniteBag)
+                && ((NonMT_FiniteBag) this.left).isRedHuh()
+                && ((NonMT_FiniteBag) this.left).right.isRedHuh()) {
+            lefty = ((NonMT_FiniteBag) this.left);
+            leftyleft = ((NonMT_FiniteBag) lefty.left);
+            leftyright = ((NonMT_FiniteBag) lefty.right);
+            return new NonMT_FiniteBag(
+                    true,
+                    new NonMT_FiniteBag(false, leftyleft, lefty.root, lefty.count, leftyright.left),
+                    leftyright.root,
+                    leftyright.count,
+                    new NonMT_FiniteBag(false, leftyright.right, this.root, this.count, this.right));
+        } else if (!this.isRedHuh() && (this.right instanceof NonMT_FiniteBag)
+                && ((NonMT_FiniteBag) this.right).isRedHuh()
+                && ((NonMT_FiniteBag) this.right).left.isRedHuh()) {
+            righty = ((NonMT_FiniteBag) this.right);
+            rightyleft = ((NonMT_FiniteBag) righty.left);
+            return new NonMT_FiniteBag(
+                    true,
+                    new NonMT_FiniteBag(false, this.left, this.root, this.count, rightyleft.left),
+                    rightyleft.root,
+                    rightyleft.count,
+                    new NonMT_FiniteBag(false, rightyleft.right, righty.root, righty.count, righty.right));
+        } else if (!this.isRedHuh() && (this.right instanceof NonMT_FiniteBag)
+                && ((NonMT_FiniteBag) this.right).isRedHuh()
+                && ((NonMT_FiniteBag) this.right).right.isRedHuh()) {
+            righty = ((NonMT_FiniteBag) this.right);
+            rightyright = ((NonMT_FiniteBag) righty.right);
+            rightyleft = ((NonMT_FiniteBag) righty.left);
+            return new NonMT_FiniteBag(
+                    true,
+                    new NonMT_FiniteBag(false, this.left, this.root, this.count, rightyleft),
+                    righty.root,
+                    righty.count,
+                    new NonMT_FiniteBag(false, rightyright.left, rightyright.root, rightyright.count, rightyright.right));
+        } else {
+            return this;
+        }
     }
 
 }
