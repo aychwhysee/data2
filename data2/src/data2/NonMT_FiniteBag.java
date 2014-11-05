@@ -206,5 +206,25 @@ public class NonMT_FiniteBag<D extends Comparable> implements FiniteBag<D> {
         }
         return sum;
     }
+    
+    public FiniteBag<D> RBInsert(D elt, int count) {
+        return this.RBInsertInner(elt, count).blacken();
+    }
+    
+    public FiniteBag<D> RBInsertInner(D elt, int count) {
+        if (elt.compareTo(this.root) == 0) {
+            return new NonMT_FiniteBag(this.isRedHuh, this.left, this.root, this.count + count, this.right);
+        } else if (elt.compareTo(this.root) < 0) {
+            return new NonMT_FiniteBag(this.isRedHuh, this.left.RBInsertInner(elt, count),
+            this.root, this.count, this.right).balance();
+        } else {
+            return new NonMT_FiniteBag(this.isRedHuh, this.left, this. root,
+            this.count, this.right.RBInsert(elt, count)).balance();
+        }
+    }
+    
+    public FiniteBag<D> blacken() {
+        return new NonMT_FiniteBag(false, this.left, this.root, this.count, this. right);
+    }
 
 }
