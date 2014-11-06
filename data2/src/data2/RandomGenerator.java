@@ -9,7 +9,7 @@ public interface RandomGenerator<D extends Comparable> {
     
     /**
      *
-     * @return
+     * @return A new random object of type D.
      */
     public D giveMeAThing();
 }
