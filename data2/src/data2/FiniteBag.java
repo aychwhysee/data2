@@ -107,62 +107,62 @@ public interface FiniteBag<D extends Comparable> extends Sequenced<D> {
     
     /**
      * 
-     * @return a Sequence containing type D 
+     * @return A sequence containing elements of type D from this. 
      */
     public Sequence<D> seq();
 
     /**
      *
-     * @return
+     * @return The number of times the method iterates through this.
      */
     public int sumIt();
 
     /**
      *
-     * @param as
-     * @return
+     * @param as a sequence containing elements of type D
+     * @return The number of times the method iterates through as
      */
     public int sumItS(Sequence<D> as);
     
     /**
      *
-     * @return
+     * @return A string with all elements in this.
      */
     public String stringIt();
     
     /**
      *
-     * @param as
-     * @return
+     * @param as a sequence containing elements of type D
+     * @return A string with all elements in as
      */
     public String stringItS(Sequence<D> as);
     
     /**
      *
-     * @param elt
-     * @param count
-     * @return
+     * @param elt an element of type D
+     * @param count an int
+     * @return A finite bag containing count more occurrences of elt, and everything in this.
      */
     public FiniteBag<D> RBInsert(D elt, int count);
     
     /**
      *
-     * @param elt
-     * @param count
-     * @return
+     * @param elt an element of type D
+     * @param count an int
+     * @return A finite bag containing count more occurrences of elt, and everything in this. Also assigns a color for balancing purposes.
      */
     public FiniteBag<D> RBInsertInner(D elt, int count);
     // ^ this replaces the add(D elt, int nCopies) method????
     
     /**
      *
-     * @return
+     * @return A finite bag that has its parent elt set to black color. Used for balancing purposes.
      */
     public FiniteBag<D> blacken();
     
     /**
      *
-     * @return
+     * @return True if root elt is "red," false if root elt is "black."
      */
     public boolean isRedHuh();
 
