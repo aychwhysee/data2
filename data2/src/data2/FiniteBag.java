@@ -107,7 +107,7 @@ public interface FiniteBag<D extends Comparable> extends Sequenced<D> {
     
     /**
      * 
-     * @return A sequence containing objects of type D from this. 
+     * @return A sequence containing objects of type D in this. 
      */
     public Sequence<D> seq();
 

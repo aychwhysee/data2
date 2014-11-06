@@ -3,7 +3,7 @@ package data2;
 /**
  *
  * @author Harry
- * @param <D>
+ * @param <D> A generic data type
  */
 public interface RandomGenerator<D extends Comparable> {
     
